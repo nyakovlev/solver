@@ -1,0 +1,75 @@
+vdd_v:
+  type: cst
+  k: [vdd, voltage]
+  v: 5
+gnd_v:
+  type: cst
+  k: [gnd, voltage]
+  v: 0
+r1_v:
+  type: cst
+  k: [r1, ohms]
+  v: 100
+r2_v:
+  type: cst
+  k: [r2, ohms]
+  v: 200
+r3_v:
+  type: cst
+  k: [r3, ohms]
+  v: 300
+r4_v:
+  type: cst
+  k: [r4, ohms]
+  v: 400
+r5_v:
+  type: cst
+  k: [r5, ohms]
+  v: 450
+pl_r_1:
+  type: computed
+  links:
+    - src: [pl_g_1]
+      convs: [{"type": "recip"}]
+pl_g_1:
+  type: computed
+  method: add
+  links:
+    - src: [r2, ohms]
+      convs: [{"type": "recip"}]
+    - src: [r3, ohms]
+      convs: [{"type": "recip"}]
+pl_r_2:
+  type: computed
+  links:
+    - src: [pl_g_2]
+      convs: [{"type": "recip"}]
+pl_g_2:
+  type: computed
+  method: add
+  links:
+    - src: [r4, ohms]
+      convs: [{"type": "recip"}]
+    - src: [r5, ohms]
+      convs: [{"type": "recip"}]
+ep_1:
+  type: computed
+  method: add
+  links:
+    - src: [vdd, voltage]
+    - src: [gnd, voltage]
+      convs: [{"type": "minus"}]
+circuit_1_r:
+  type: computed
+  method: add
+  links:
+    - src: [r1]
+    - src: [pl_r_1]
+    - src: [pl_r_2]
+circuit_1_i:
+  type: computed
+  method: mult
+  links:
+    - src: [ep_1]
+    - src: [circuit_1_r]
+      convs: [{"type": "recip"}]

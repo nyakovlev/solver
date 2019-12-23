@@ -1,0 +1,31 @@
+type: circuit
+endpoints: []
+d:
+  v_1:
+    type: voltage
+    volts: 5
+    endpoints:
+      - id: vin
+  gnd_1:
+    type: gnd
+    endpoints:
+      - id: gnd
+  r_1:
+    type: resistor
+    ohms: 100
+    endpoints:
+      - id: a
+      - id: b
+  r_2:
+    type: resistor
+    ohms: 100
+    endpoints:
+      - id: a
+      - id: b
+connections:
+  - src: [d, v_1, vin]
+    dst: [d, r_1, a]
+  - src: [d, r_1, b]
+    dst: [d, r_2, a]
+  - src: [d, r_2, b]
+    dst: [d, gnd_1, gnd]
