@@ -63,7 +63,7 @@ circuit_1_r:
   type: computed
   method: add
   links:
-    - src: [r1]
+    - src: [r1, ohms]
     - src: [pl_r_1]
     - src: [pl_r_2]
 circuit_1_i:
