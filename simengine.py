@@ -1,5 +1,4 @@
 import yaml
-from pprint import pprint
 
 
 CFILE = "sample_csts.yml"
@@ -37,14 +36,6 @@ class Solver:
             "dst": name,
             "v": d["v"]
         })
-        # for link in d["links"]:
-        #     s = "/".join(link["src"])
-        #     if s not in self.cst_map:
-        #         self.cst_map[s] = []
-        #     self.cst_map[s].append({
-        #         "dst": name,
-        #         "convs": link["convs"]
-        #     })
 
     def add_computed(self, name, d):
         self.comp_map[name] = d
