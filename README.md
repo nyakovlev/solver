@@ -13,7 +13,7 @@ x + y = z + 4
 x + z = y + 6
 </pre>
 The system of equations can be modeled like so:
-[](/basic_solve.svg)
+[](https://github.com/nyakovlev/solver/blob/master/basic_solve.svg)
 
 - A Param is key-value pair in a user environment.
   - Every environment is defined by a single dictionary; it stores
@@ -42,7 +42,13 @@ aggregated.
   solve algebraic systems. 
 
 This model provides a generic way to define and solve systems
-of computed constraints. The user specifies a constraint 
+of computed constraints. The Solver takes user-defined constraints
+and moves up and down layers of conversions and computed params
+in order to define a system as completely as possible.
+
+The would also be able to detect constraint conflicts, where no
+solution exists for a system of params.
+
 ---
 There are many other applications for such a solving tool.
 The following features are planned:
