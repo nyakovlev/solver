@@ -13,7 +13,8 @@ x + y = z + 4
 x + z = y + 6
 </pre>
 The system of equations can be modeled like so:
-[](https://github.com/nyakovlev/solver/blob/master/basic_solve.svg)
+
+![Simple Solve Diagram](https://i.ibb.co/PZyXSM3/basic-solve.png)
 
 - A Param is key-value pair in a user environment.
   - Every environment is defined by a single dictionary; it stores
