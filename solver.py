@@ -21,7 +21,8 @@ class AggSolver:
             "i": None,
             "oi": None,
             "unsolved": -1,
-            "total": -1
+            "total": -1,
+            "flip": False
         }
         for i in range(0, len(eqs)):
             e = eqs[i]
@@ -29,25 +30,48 @@ class AggSolver:
             ois = [oi for oi in range(0, len(eqs)) if oi != i and oi not in rts]
             for oi in ois:
                 oe = eqs[oi]
-                u, t = self.get_reduction(e, oe)
-                self.update_best(best, i, oi, u, t)
+                u, t, f = self.get_reduction(e, oe)
+                self.update_best(best, i, oi, u, t, f)
         if best["i"] is not None:
             ne = self.get_reduction(eqs[best["i"]], eqs[best["oi"]])
             rt_map[len(eqs)] = [best["i"], best["oi"]]
             eqs.append(ne)
             return ne
 
-    def update_best(self, best, i, oi, u, t):
+    def update_best(self, best, i, oi, u, t, f):
         if u == 0:
             return
-        if (u < best["unsolved"]) or (u == best["unsolved"] and t < best["total"]):
-            best["i"] = i
-            best["oi"] = oi
-            best["unsolved"] = u
-            best["total"] = t
+        if u < t:
+            if (u < best["unsolved"]) or (u == best["unsolved"] and t < best["total"]):
+                best["i"] = i
+                best["oi"] = oi
+                best["unsolved"] = u
+                best["total"] = t
+                best["flip"] = f
 
     def get_reduction(self, a, b):
-        return 0, 0
+        for e in [a, b]:
+            for ei in [0, 1]:
+                e[ei] = [i for i in e[ei] if type(i) is str]
+        t = len(list(set(a[0] + a[1] + b[0] + b[1])))
+        u1 = self.get_u(a[0] + b[0], a[1] + b[1])
+        u2 = self.get_u(a[0] + b[1], a[1] + b[0])
+        if 0 < u2 < u1:
+            return u2, t, True
+        else:
+            return u1, t, False
+
+    def get_u(self, a, b):
+        a = [i for i in a]
+        b = [i for i in b]
+        rm = []
+        for i in a:
+            if i in b:
+                rm.append(i)
+                b.remove(i)
+        for i in rm:
+            a.remove(i)
+        return len(list(set(a + b)))
 
     def combine_eqs(self, a, b):
         pass
