@@ -1,496 +1,1143 @@
 # op amp I/O: out, p_in, n_in
 # mosfet I/O: gate: src: drn
-components:
-  - id: 0
-    type: vsrc
-    label: 5V
-    volts: 5
-  - id: 1
-    type: vsrc
-    label: GND
-    volts: 0
-  - id: 2
-    type: capacitor
-    label: C1
-    nf: 100
-  - id: 3
-    type: vsrc
-    label: VIN
-    volts: [6, 20]
-  - id: 4
-    type: resistor
-    label: RN1B
-    kohms: 10
-  - id: 5
-    type: resistor
-    label: RN1A
-    kohms: 10
-  - id: 6
-    type: opamp
-    label: U1A
-    pn: "lm358d"
-  - id: 7
-    type: vsrc
-    label: 3V3
-    volts: 3.3
-  - id: 8
-    type: mosfet
-    label: T1
-    channel: p
-    pn: "fdn304v"
-  - id: 9
-    type: vsrc
-    label: USBVCC
-    volts: 5
-  - id: 10
-    type: ic
-    label: U2
-    pn: "lp2985-33dbvr"
-  - id: 11
-    type: capacitor
-    label: C3
-    uf: 1
-  - id: 12
-    type: opamp
-    label: U1B
-    pn: "lm358d"
-  - id: 13
-    type: capacitor
-    label: C9
-    pf: 22
-  - id: 14
-    type: capacitor
-    label: C11
-    pf: 22
-  - id: 15
-    type: oscillator
-    label: Q1
-    mhz: 16
-  - id: 16
-    type: capacitor
-    label: C10
-    pf: 22
-  - id: 17
-    type: capacitor
-    label: C12
-    pf: 22
-  - id: 18
-    type: oscillator
-    label: Q2
-    mhz: 16
+# led: gnd is a, other is b
+- id: 0
+  type: pin
+  label: 5V
+#  volts: 5
+- id: 1
+  type: pin
+  label: GND
+#  volts: 0
+- id: 2
+  type: capacitor
+  label: C1
+  nf: 100
+- id: 3
+  type: pin
+  label: VIN
+- id: 4
+  type: resistor
+  label: RN1B
+  kohms: 10
+- id: 5
+  type: resistor
+  label: RN1A
+  kohms: 10
+- id: 6
+  type: opamp
+  label: U1A
+  pn: "lm358d"
+- id: 7
+  type: vsrc
+  label: 3V3
+  volts: 3.3
+- id: 8
+  type: mosfet
+  label: T1
+  channel: p
+  pn: "fdn304v"
+- id: 9
+  type: vsrc
+  label: USBVCC
+  volts: 5
+- id: 10
+  type: ic
+  label: U2
+  pn: "lp2985-33dbvr"
+- id: 11
+  type: capacitor
+  label: C3
+  uf: 1
+- id: 12
+  type: opamp
+  label: U1B
+  pn: "lm358d"
+- id: 13
+  type: capacitor
+  label: C9
+  pf: 22
+- id: 14
+  type: capacitor
+  label: C11
+  pf: 22
+- id: 15
+  type: oscillator
+  label: Q1
+  mhz: 16
+- id: 16
+  type: capacitor
+  label: C10
+  pf: 22
+- id: 17
+  type: capacitor
+  label: C12
+  pf: 22
+- id: 18
+  type: oscillator
+  label: Q2
+  mhz: 16
+- id: w_0
+  type: connection
+  src: [0]
+  dst: [2, a]
+- id: w_1
+  type: connection
+  src: [2, b]
+  dst: [1]
+- id: w_2
+  type: connection
+  src: [3]
+  dst: [4, a]
+- id: w_3
+  type: connection
+  src: [4, b]
+  dst: [6, p_in]
+- id: w_4
+  type: connection
+  src: [5, a]
+  dst: [6, p_in]
+- id: w_5
+  type: connection
+  src: [5, n_in]
+  dst: [1]
+- id: w_6
+  type: connection
+  src: [7]
+  dst: [6, n_in]
+- id: w_7
+  type: connection
+  src: [6, out]
+  dst: [8, gate]
+- id: w_8
+  type: connection
+  src: [9]
+  dst: [8, src]
+- id: w_9
+  type: connection
+  src: [8, drn]
+  dst: [0]
+- id: w_10
+  type: connection
+  src: [8, drn]
+  dst: [10, 1]
+- id: w_11
+  type: connection
+  src: [8, drn]
+  dst: [10, 3]
+- id: w_12
+  type: connection
+  src: [10, 2]
+  dst: [1]
+- id: w_13
+  type: connection
+  src: [10, 5]
+  dst: [11, a]
+- id: w_14
+  type: connection
+  src: [11, b]
+  dst: [1]
+- id: w_15
+  type: connection
+  src: [1]
+  dst: [12, p_in]
+- id: w_16
+  type: connection
+  src: [1]
+  dst: [12, n_in]
+- id: w_17
+  type: connection
+  src: [1]
+  dst: [13, a]
+- id: w_18
+  type: connection
+  src: [1]
+  dst: [14, a]
+- id: w_19
+  type: connection
+  src: [13, b]
+  dst: [15, a]
+- id: w_20
+  type: connection
+  src: [14, b]
+  dst: [15, b]
+- id: w_21
+  type: connection
+  src: [1]
+  dst: [16, a]
+- id: w_22
+  type: connection
+  src: [1]
+  dst: [17, a]
+- id: w_23
+  type: connection
+  src: [16, b]
+  dst: [18, a]
+- id: w_24
+  type: connection
+  src: [17, b]
+  dst: [18, b]
 
-  - id: 19
-    type: pin
-    group: POWER
-    label: 1
-  - id: 20
-    type: pin
-    group: POWER
-    label: 2
-  - id: 21
-    type: pin
-    group: POWER
-    label: 3
-  - id: 20
-    type: pin
-    group: POWER
-    label: 4
-  - id: 21
-    type: pin
-    group: POWER
-    label: 5
-  - id: 22
-    type: pin
-    group: POWER
-    label: 6
+- id: 19
+  type: pin
+  group: POWER
+  label: 1
+- id: 20
+  type: pin
+  group: POWER
+  label: 2
+- id: 21
+  type: pin
+  group: POWER
+  label: 3
+- id: 20
+  type: pin
+  group: POWER
+  label: 4
+- id: 21
+  type: pin
+  group: POWER
+  label: 5
+- id: 22
+  type: pin
+  group: POWER
+  label: 6
 
-  - id: 23
-    type: pin
-    group: IOH
-    label: 1
-  - id: 24
-    type: pin
-    group: IOH
-    label: 2
-  - id: 25
-    type: pin
-    group: IOH
-    label: 3
-  - id: 26
-    type: pin
-    group: IOH
-    label: 4
-  - id: 27
-    type: pin
-    group: IOH
-    label: 5
-  - id: 28
-    type: pin
-    group: IOH
-    label: 6
-  - id: 29
-    type: pin
-    group: IOH
-    label: 7
-  - id: 30
-    type: pin
-    group: IOH
-    label: 8
+- id: 23
+  type: pin
+  group: IOH
+  label: 1
+- id: 24
+  type: pin
+  group: IOH
+  label: 2
+- id: 25
+  type: pin
+  group: IOH
+  label: 3
+- id: 26
+  type: pin
+  group: IOH
+  label: 4
+- id: 27
+  type: pin
+  group: IOH
+  label: 5
+- id: 28
+  type: pin
+  group: IOH
+  label: 6
+- id: 29
+  type: pin
+  group: IOH
+  label: 7
+- id: 30
+  type: pin
+  group: IOH
+  label: 8
+- id: w_81
+  type: connection
+  src: [23]
+  dst: [64, 14]
+- id: w_82
+  type: connection
+  src: [24]
+  dst: [64, 15]
+- id: w_83
+  type: connection
+  src: [25]
+  dst: [64, 16]
+- id: w_84
+  type: connection
+  src: [26]
+  dst: [64, 17]
+- id: w_85
+  type: connection
+  src: [27]
+  dst: [64, 18]
+- id: w_86
+  type: connection
+  src: [28]
+  dst: [64, 19]
+- id: w_87
+  type: connection
+  src: [29]
+  dst: [1]
+- id: 80
+  type: pin
+  label: AREF
+- id: w_88
+  type: connection
+  src: [30]
+  dst: [80]
+- id: 81
+  type: capacitor
+  label: C4
+  nf: 100
+- id: w_89
+  type: connection
+  src: [30]
+  dst: [81, a]
+- id: w_90
+  type: connection
+  src: [81, b]
+  dst: [1]
 
-  - id: 31
-    type: pin
-    group: AD
-    label: 1
-  - id: 32
-    type: pin
-    group: AD
-    label: 2
-  - id: 33
-    type: pin
-    group: AD
-    label: 3
-  - id: 34
-    type: pin
-    group: AD
-    label: 4
-  - id: 35
-    type: pin
-    group: AD
-    label: 5
-  - id: 36
-    type: pin
-    group: AD
-    label: 6
+- id: 31
+  type: pin
+  group: AD
+  label: 1
+- id: 32
+  type: pin
+  group: AD
+  label: 2
+- id: 33
+  type: pin
+  group: AD
+  label: 3
+- id: 34
+  type: pin
+  group: AD
+  label: 4
+- id: 35
+  type: pin
+  group: AD
+  label: 5
+- id: 36
+  type: pin
+  group: AD
+  label: 6
+- id: w_75
+  type: connection
+  src: [31]
+  dst: [64, 23]
+- id: w_76
+  type: connection
+  src: [32]
+  dst: [64, 24]
+- id: w_77
+  type: connection
+  src: [33]
+  dst: [64, 25]
+- id: w_78
+  type: connection
+  src: [34]
+  dst: [64, 26]
+- id: w_79
+  type: connection
+  src: [35]
+  dst: [64, 27]
+- id: w_80
+  type: connection
+  src: [36]
+  dst: [64, 28]
 
-  - id: 37
-    type: pin
-    group: IOL
-    label: 1
-  - id: 38
-    type: pin
-    group: IOL
-    label: 2
-  - id: 39
-    type: pin
-    group: IOL
-    label: 3
-  - id: 40
-    type: pin
-    group: IOL
-    label: 4
-  - id: 41
-    type: pin
-    group: IOL
-    label: 5
-  - id: 42
-    type: pin
-    group: IOL
-    label: 6
-  - id: 43
-    type: pin
-    group: IOL
-    label: 7
-  - id: 44
-    type: pin
-    group: IOL
-    label: 8
+- id: 37
+  type: pin
+  group: IOL
+  label: 1
+- id: 38
+  type: pin
+  group: IOL
+  label: 2
+- id: 39
+  type: pin
+  group: IOL
+  label: 3
+- id: 40
+  type: pin
+  group: IOL
+  label: 4
+- id: 41
+  type: pin
+  group: IOL
+  label: 5
+- id: 42
+  type: pin
+  group: IOL
+  label: 6
+- id: 43
+  type: pin
+  group: IOL
+  label: 7
+- id: 44
+  type: pin
+  group: IOL
+  label: 8
+- id: w_67
+  type: connection
+  src: [37]
+  dst: [64, 2]
+- id: w_68
+  type: connection
+  src: [38]
+  dst: [64, 3]
+- id: w_69
+  type: connection
+  src: [39]
+  dst: [64, 4]
+- id: w_70
+  type: connection
+  src: [40]
+  dst: [64, 5]
+- id: w_71
+  type: connection
+  src: [41]
+  dst: [64, 6]
+- id: w_72
+  type: connection
+  src: [42]
+  dst: [64, 11]
+- id: w_73
+  type: connection
+  src: [43]
+  dst: [64, 12]
+- id: w_74
+  type: connection
+  src: [44]
+  dst: [64, 13]
 
-  - id: 45
-    type: pin
-    group: ICSP
-    label: 1
-  - id: 46
-    type: pin
-    group: ICSP
-    label: 2
-  - id: 47
-    type: pin
-    group: ICSP
-    label: 3
-  - id: 48
-    type: pin
-    group: ICSP
-    label: 4
-  - id: 49
-    type: pin
-    group: ICSP
-    label: 5
-  - id: 50
-    type: pin
-    group: ICSP
-    label: 6
 
-  - id: 51
-    type: pin
-    group: ICSP1
-    label: 1
-  - id: 52
-    type: pin
-    group: ICSP1
-    label: 2
-  - id: 53
-    type: pin
-    group: ICSP1
-    label: 3
-  - id: 54
-    type: pin
-    group: ICSP1
-    label: 4
-  - id: 55
-    type: pin
-    group: ICSP1
-    label: 5
-  - id: 56
-    type: pin
-    group: ICSP1
-    label: 6
+- id: 45
+  type: pin
+  group: ICSP
+  label: 1
+- id: 46
+  type: pin
+  group: ICSP
+  label: 2
+- id: 47
+  type: pin
+  group: ICSP
+  label: 3
+- id: 48
+  type: pin
+  group: ICSP
+  label: 4
+- id: 49
+  type: pin
+  group: ICSP
+  label: 5
+- id: 50
+  type: pin
+  group: ICSP
+  label: 6
 
-  - id: 57
-    type: pin
-    group: USB
-    label: 1
-  - id: 58
-    type: pin
-    group: USB
-    label: 2
-  - id: 59
-    type: pin
-    group: USB
-    label: 3
-  - id: 60
-    type: pin
-    group: USB
-    label: 4
-  - id: 61
-    type: pin
-    group: USB
-    label: PS1
-  - id: 62
-    type: pin
-    group: USB
-    label: PS2
+- id: 51
+  type: pin
+  group: ICSP1
+  label: 1
+- id: 52
+  type: pin
+  group: ICSP1
+  label: 2
+- id: 53
+  type: pin
+  group: ICSP1
+  label: 3
+- id: 54
+  type: pin
+  group: ICSP1
+  label: 4
+- id: 55
+  type: pin
+  group: ICSP1
+  label: 5
+- id: 56
+  type: pin
+  group: ICSP1
+  label: 6
+- id: w_25
+  type: connection
+  src: [51]
+  dst: [63, 17]
+- id: w_26
+  type: connection
+  src: [52]
+  dst: [0]
+- id: w_27
+  type: connection
+  src: [52]
+  dst: [65, a]
+- id: w_28
+  type: connection
+  src: [65, b]
+  dst: [63, 24]
+- id: w_29
+  type: connection
+  src: [53]
+  dst: [63, 15]
+- id: w_30
+  type: connection
+  src: [54]
+  dst: [63, 16]
+- id: w_31
+  type: connection
+  src: [55]
+  dst: [63, 24]
+- id: w_32
+  type: connection
+  src: [56]
+  dst: [1]
 
-  - id: 63
-    type: ic
-    label: U3
-    pn: "atmega8u2-mu"
-  - id: 64
-    type: ic
-    label: ZIC1
-    pn: "atmega8"
+- id: 57
+  type: pin
+  group: USB
+  label: 1
+- id: 58
+  type: pin
+  group: USB
+  label: 2
+- id: 59
+  type: pin
+  group: USB
+  label: 3
+- id: 60
+  type: pin
+  group: USB
+  label: 4
+- id: 61
+  type: pin
+  group: USB
+  label: PS1
+- id: 62
+  type: pin
+  group: USB
+  label: PS2
 
-  - id: 65
-    type: resistor
-    label: RN1C
-    kohms: 10
-  - id: 66
-    type: oscillator
-    label: Y1
-    mhz: 16
-  - id: 67
-    type: capacitor  # farads???
-    label: XT2
-  - id: 68
-    type: capacitor  # farads???
-    label: XT1
-  - id: 69
-    type: resistor
-    label: R3
-    ohms: 27
-  - id: 70
-    type: resistor
-    label: R1
-    mohms: 1
-  - id: 71
-    type: capacitor
-    label: C7
-    nf: 100
+- id: 63
+  type: ic
+  label: U3
+  pn: "atmega8u2-mu"
+- id: 64
+  type: ic
+  label: ZIC1
+  pn: "atmega8"
 
-  - id: 72
-    type: fuse
-    label: F1
-    ma: 500
-  - id: 73
-    type: resistor
-    label: RN3A
-    ohms: 22
-  - id: 74
-    type: resistor
-    label: RN3D
-    ohms: 22
-  - id: 75
-    type: varistor
-    label: Z2
-    pn: "pgb1010604"
-  - id: 76
-    type: varistor
-    label: Z1
-    pn: "pgb1010604"
-  - id: 77
-    type: ferrite
-    label: L1
-    pn: blm21
-  - id: 78
-    type: capacitor
-    label: C8
-    uf: 1
-  - id: 79
-    type: ground
-    label: GROUND
+- id: 65
+  type: resistor
+  label: RN1C
+  kohms: 10
+- id: 66
+  type: oscillator
+  label: Y1
+  mhz: 16
+- id: 67
+  type: capacitor  # farads???
+- id: 68
+  type: capacitor  # farads???
+- id: 69
+  type: resistor
+  label: R3
+  ohms: 27
+- id: 70
+  type: resistor
+  label: R1
+  mohms: 1
+- id: w_33
+  type: connection
+  src: [63, 2]
+  dst: [66, a]
+- id: w_34
+  type: connection
+  src: [66, a]
+  dst: [67, a]
+- id: w_35
+  type: connection
+  src: [67, b]
+  dst: [1]
+- id: w_36
+  type: connection
+  src: [63, 1]
+  dst: [69, a]
+- id: w_37
+  type: connection
+  src: [69, b]
+  dst: [66, b]
+- id: w_38
+  type: connection
+  src: [69, b]
+  dst: [70, a]
+- id: w_39
+  type: connection
+  src: [70, b]
+  dst: [66, a]
+- id: w_40
+  type: connection
+  src: [66, b]
+  dst: [68, a]
+- id: w_41
+  type: connection
+  src: [68, b]
+  dst: [1]
 
-connections:
-  - src: [0]
-    dst: [2, a]
-  - src: [2, b]
-    dst: [1]
-  - src: [3]
-    dst: [4, a]
-  - src: [4, b]
-    dst: [6, p_in]
-  - src: [5, a]
-    dst: [6, p_in]
-  - src: [5, n_in]
-    dst: [1]
-  - src: [7]
-    dst: [6, n_in]
-  - src: [6, out]
-    dst: [8, gate]
-  - src: [9]
-    dst: [8, src]
-  - src: [8, drn]
-    dst: [0]
-  - src: [8, drn]
-    dst: [10, 1]
-  - src: [8, drn]
-    dst: [10, 3]
-  - src: [10, 2]
-    dst: [1]
-  - src: [10, 5]
-    dst: [11, a]
-  - src: [11, b]
-    dst: [1]
-  - src: [1]
-    dst: [12, p_in]
-  - src: [1]
-    dst: [12, n_in]
-  - src: [1]
-    dst: [13, a]
-  - src: [1]
-    dst: [14, a]
-  - src: [13, b]
-    dst: [15, a]
-  - src: [14, b]
-    dst: [15, b]
-  - src: [1]
-    dst: [16, a]
-  - src: [1]
-    dst: [17, a]
-  - src: [16, b]
-    dst: [18, a]
-  - src: [17, b]
-    dst: [18, b]
+- id: 71
+  type: capacitor
+  label: C7
+  nf: 100
+- id: w_42
+  type: connection
+  src: [63, 32]
+  dst: [0]
+- id: w_43
+  type: connection
+  src: [63, 32]
+  dst: [63, 4]
+- id: w_44
+  type: connection
+  src: [63, 4]
+  dst: [71, a]
+- id: w_45
+  type: connection
+  src: [71, b]
+  dst: [1]
 
-  - src: [51]
-    dst: [63, 17]
-  - src: [52]
-    dst: [0]
-  - src: [52]
-    dst: [65, a]
-  - src: [65, b]
-    dst: [63, 24]
-  - src: [53]
-    dst: [63, 15]
-  - src: [54]
-    dst: [63, 16]
-  - src: [55]
-    dst: [63, 24]
-  - src: [56]
-    dst: [1]
+- id: 72
+  type: fuse
+  label: F1
+  ma: 500
+- id: 73
+  type: resistor
+  label: RN3A
+  ohms: 22
+- id: 74
+  type: resistor
+  label: RN3D
+  ohms: 22
+- id: 75
+  type: varistor
+  label: Z2
+  pn: "pgb1010604"
+- id: 76
+  type: varistor
+  label: Z1
+  pn: "pgb1010604"
+- id: 77
+  type: ferrite
+  label: L1
+  pn: blm21
+- id: 78
+  type: capacitor
+  label: C8
+  uf: 1
+- id: 79
+  type: jumper
+  label: GROUND
+- id: w_46
+  type: connection
+  src: [57]
+  dst: [72, a]
+- id: w_47
+  type: connection
+  src: [72, b]
+  dst: [9]
+- id: w_48
+  type: connection
+  src: [58]
+  dst: [73, a]
+- id: w_49
+  type: connection
+  src: [73, b]
+  dst: [63, 30]
+- id: w_50
+  type: connection
+  src: [59]
+  dst: [74, a]
+- id: w_51
+  type: connection
+  src: [74, b]
+  dst: [63, 29]
+- id: w_52
+  type: connection
+  src: [58]
+  dst: [75, a]
+- id: w_53
+  type: connection
+  src: [75, b]
+  dst: [77, a]
+- id: w_54
+  type: connection
+  src: [59]
+  dst: [76, a]
+- id: w_55
+  type: connection
+  src: [76, b]
+  dst: [77, a]
+- id: w_56
+  type: connection
+  src: [61]
+  dst: [77, a]
+- id: w_57
+  type: connection
+  src: [62]
+  dst: [77, a]
+- id: w_58
+  type: connection
+  src: [60]
+  dst: [77, b]
+- id: w_59
+  type: connection
+  src: [60]
+  dst: [63, 28]
+- id: w_60
+  type: connection
+  src: [60]
+  dst: [78, a]
+- id: w_61
+  type: connection
+  src: [78, b]
+  dst: [63, 27]
+- id: w_62
+  type: connection
+  src: [60]
+  dst: [79, 2]
+- id: w_63
+  type: connection
+  src: [79, 1]
+  dst: [63, exp]
+- id: w_64
+  type: connection
+  src: [79, 1]
+  dst: [1]
+- id: w_65
+  type: connection
+  src: [63, 3]
+  dst: [1]
+- id: w_66
+  type: connection
+  src: [63, 31]
+  dst: [9]
 
-  - src: [63, 2]
-    dst: [66, a]
-  - src: [66, a]
-    dst: [67, a]
-  - src: [67, b]
-    dst: [1]
-  - src: [63, 1]
-    dst: [69, a]
-  - src: [69, b]
-    dst: [66, b]
-  - src: [69, b]
-    dst: [70, a]
-  - src: [70, b]
-    dst: [66, a]
-  - src: [66, b]
-    dst: [68, a]
-  - src: [68, b]
-    dst: [1]
+- id: 82
+  type: resistor
+  label: RN4B
+  kohms: 1
+- id: w_91
+  type: connection
+  src: [64, 2]
+  dst: [82, a]
+- id: w_92
+  type: connection
+  src: [82, b]
+  dst: [63, 9]
+- id: 83
+  type: resistor
+  label: RN4A
+  kohms: 1
+- id: w_93
+  type: connection
+  src: [64, 3]
+  dst: [83, a]
+- id: w_94
+  type: connection
+  src: [83, b]
+  dst: [63, 8]
 
-  - src: [63, 32]
-    dst: [0]
-  - src: [63, 32]
-    dst: [63, 4]
-  - src: [63, 4]
-    dst: [71, a]
-  - src: [71, b]
-    dst: [1]
+- id: 84
+  type: led
+  label: TXLED
+  color: yellow
+- id: 85
+  type: resistor
+  label: RN2D
+  kohms: 1
+- id: w_95
+  type: connection
+  src: [63, 11]
+  dst: [84, a]
+- id: w_96
+  type: connection
+  src: [84, b]
+  dst: [85, a]
+- id: w_97
+  type: connection
+  src: [85, b]
+  dst: [0]
+- id: 86
+  type: led
+  label: RXLED
+  color: yellow
+- id: 87
+  type: resistor
+  label: RN2C
+  kohms: 1
+- id: w_98
+  type: connection
+  src: [63, 10]
+  dst: [86, a]
+- id: w_99
+  type: connection
+  src: [86, b]
+  dst: [87, a]
+- id: w_100
+  type: connection
+  src: [87, b]
+  dst: [0]
 
-  - src: [57]
-    dst: [72, a]
-  - src: [72, b]
-    dst: [9]
-  - src: [58]
-    dst: [73, a]
-  - src: [73, b]
-    dst: [63, 30]
-  - src: [59]
-    dst: [74, a]
-  - src: [74, b]
-    dst: [63, 29]
-  - src: [58]
-    dst: [75, a]
-  - src: [75, b]
-    dst: [77, a]
-  - src: [59]
-    dst: [76, a]
-  - src: [76, b]
-    dst: [77, a]
-  - src: [61]
-    dst: [77, a]
-  - src: [62]
-    dst: [77, a]
-  - src: [60]
-    dst: [77, b]
-  - src: [60]
-    dst: [63, 28]
-  - src: [60]
-    dst: [78, a]
-  - src: [78, b]
-    dst: [63, 27]
-  - src: [60]
-    dst: [79, 2]
-  - src: [79, 1]
-    dst: [63, exp]
-  - src: [79, 1]
-    dst: [1]
-  - src: [63, 3]
-    dst: [1]
+- id: 88
+  type: capacitor
+  label: C6
+  nf: 100
+- id: w_101
+  type: connection
+  src: [64, 8]
+  dst: [1]
+- id: w_102
+  type: connection
+  src: [64, 8]
+  dst: [88, a]
+- id: w_103
+  type: connection
+  src: [88, b]
+  dst: [64, 7]
+- id: w_104
+  type: connection
+  src: [64, 7]
+  dst: [64, 20]
+- id: w_105
+  type: connection
+  src: [64, 8]
+  dst: [64, 22]
+- id: w_106
+  type: connection
+  src: [64, 7]
+  dst: [0]
 
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
-  - src: []
-    dst: []
+- id: 89
+  type: jumper
+  label: UBOOT
+- id: 90
+  type: jumper
+  label: "RESET-EN"
+- id: 91
+  type: capacitor
+  label: C5
+  nf: 100
+- id: 92
+  type: resistor
+  label: R2
+  mohms: 1
+- id: 93
+  type: oscillator
+  label: Y2
+  mhz: 16
+- id: 94
+  type: capacitor  # farads??
+- id: 95
+  type: capacitor  # farads??
+- id: w_107
+  type: connection
+  src: [63, 13]
+  dst: [89, a]
+- id: w_108
+  type: connection
+  src: [89, b]
+  dst: [0]
+- id: w_109
+  type: connection
+  src: [63, 13]
+  dst: [91, a]
+- id: w_110
+  type: connection
+  src: [91, b]
+  dst: [90, a]
+- id: w_111
+  type: connection
+  src: [91, b]
+  dst: [90, b]
+- id: w_112
+  type: connection
+  src: [64, 10]
+  dst: [92, a]
+- id: w_113
+  type: connection
+  src: [64, 10]
+  dst: [93, a]
+- id: w_114
+  type: connection
+  src: [64, 10]
+  dst: [94, a]
+- id: w_115
+  type: connection
+  src: [94, b]
+  dst: [89, b]
+- id: w_116
+  type: connection
+  src: [64, 9]
+  dst: [92, b]
+- id: w_117
+  type: connection
+  src: [64, 9]
+  dst: [93, b]
+- id: w_118
+  type: connection
+  src: [64, 9]
+  dst: [95, a]
+- id: w_119
+  type: connection
+  src: [95, b]
+  dst: [89, b]
+
+- id: 96
+  type: resistor
+  label: RN3B
+  ohms: 22
+- id: 97
+  type: resistor
+  label: RN3C
+  ohms: 22
+
+- id: w_120
+  type: connection
+  src: [19]
+  dst: [91, b]
+- id: w_121
+  type: connection
+  src: [19]
+  dst: [64, 1]
+- id: 98
+  type: resistor
+  label: RN1D
+  kohms: 10
+- id: w_122
+  type: connection
+  src: [64, 1]
+  dst: [98, a]
+- id: w_123
+  type: connection
+  src: [98, b]
+  dst: [0]
+- id: w_124
+  type: connection
+  src: [20]
+  dst: [7]
+- id: w_125
+  type: connection
+  src: [21]
+  dst: [0]
+- id: w_126
+  type: connection
+  src: [22]
+  dst: [1]
+- id: w_127
+  type: connection
+  src: [23]
+  dst: [1]
+- id: w_128
+  type: connection
+  src: [24]
+  dst: [3]
+
+- id: w_129
+  type: connection
+  src: [45]
+  dst: [64, 18]
+- id: w_130
+  type: connection
+  src: [46]
+  dst: [0]
+- id: w_131
+  type: connection
+  src: [47]
+  dst: [64, 19]
+- id: w_132
+  type: connection
+  src: [48]
+  dst: [64, 17]
+- id: w_133
+  type: connection
+  src: [49]
+  dst: [64, 1]
+- id: w_134
+  type: connection
+  src: [50]
+  dst: [1]
+
+- id: 99
+  type: switch
+  label: RESET
+  pn: "ts42"
+- id: w_135
+  type: connection
+  src: [64, 1]
+  dst: [99, 1]
+- id: w_136
+  type: connection
+  src: [64, 1]
+  dst: [99, 2]
+- id: w_137
+  type: connection
+  src: [99, 3]
+  dst: [1]
+- id: w_138
+  type: connection
+  src: [99, 4]
+  dst: [1]
+- id: w_139
+  type: connection
+  src: [99, base]
+  dst: [1]
+
+- id: 100
+  type: led
+  label: L
+  color: yellow
+- id: 101
+  type: resistor
+  label: RN2A
+  kohms: 1
+- id: 102
+  type: resistor
+  label: RN2B
+  kohms: 1
+- id: w_140
+  type: connection
+  src: [64, 19]
+  dst: [101, a]
+- id: w_141
+  type: connection
+  src: [64, 19]
+  dst: [102, a]
+- id: w_142
+  type: connection
+  src: [101, b]
+  dst: [100, b]
+- id: w_143
+  type: connection
+  src: [102, b]
+  dst: [100, b]
+- id: w_144
+  type: connection
+  src: [100, a]
+  dst: [1]
+
+- id: 103
+  type: led
+  label: ON
+  color: green
+- id: 104
+  type: resistor
+  label: RN4D
+  kohms: 1
+- id: 105
+  type: resistor
+  label: RN4C
+  kohms: 1
+- id: w_145
+  type: connection
+  src: [0]
+  dst: [104, a]
+- id: w_146
+  type: connection
+  src: [0]
+  dst: [105, a]
+- id: w_147
+  type: connection
+  src: [104, b]
+  dst: [103, b]
+- id: w_148
+  type: connection
+  src: [105, b]
+  dst: [103, b]
+- id: w_149
+  type: connection
+  src: [103, a]
+  dst: [1]
+
+- id: 106
+  type: power_jack
+  label: PWRIN
+  end: female
+- id: 107
+  type: diode
+  label: D1
+- id: 108
+  type: ic
+  label: IC1
+  pn: "MC33269ST-5.0T3"
+- id: 109
+  type: ic
+  label: IC2
+  pn: "MC33269D-5.0"
+- id: 110
+  type: capacitor
+  label: PC1
+  polarized: true
+  uf: 47
+- id: 111
+  type: capacitor
+  label: PC2
+  polarized: true
+  uf: 47
+- id: 112
+  type: capacitor
+  label: C2
+  nf: 100
+- id: w_150
+  type: connection
+  src: [106, 1]
+  dst: [1]
+- id: w_151
+  type: connection
+  src: [106, 2]
+  dst: [107, b]
+- id: w_152
+  type: connection
+  src: [106, 3]
+  dst: [1]
+- id: w_153
+  type: connection
+  src: [107, a]
+  dst: [109, 3]
+- id: w_154
+  type: connection
+  src: [109, 3]
+  dst: [110, p]
+- id: w_155
+  type: connection
+  src: [109, 3]
+  dst: [3]
+- id: w_156
+  type: connection
+  src: [108, 3]
+  dst: [3]
+- id: w_157
+  type: connection
+  src: [110, n]
+  dst: [1]
+- id: w_158
+  type: connection
+  src: [109, 1]
+  dst: [1]
+- id: w_159
+  type: connection
+  src: [108, 1]
+  dst: [1]
+- id: w_160
+  type: connection
+  src: [108, 4]
+  dst: [0]
+- id: w_161
+  type: connection
+  src: [108, 2]
+  dst: [0]
+- id: w_162
+  type: connection
+  src: [109, 2]
+  dst: [0]
+- id: w_163
+  type: connection
+  src: [0]
+  dst: [111, p]
+- id: w_164
+  type: connection
+  src: [111, n]
+  dst: [1]
+- id: w_165
+  type: connection
+  src: [0]
+  dst: [112, a]
+- id: w_166
+  type: connection
+  src: [112, b]
+  dst: [1]
