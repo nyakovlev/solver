@@ -1,3 +1,6 @@
+from pprint import pprint
+
+
 class AggSolver:
     def __init__(self, swap=None, op=None, div=None):
         self.swap = (lambda x: -x) if swap is None else swap
@@ -33,7 +36,8 @@ class AggSolver:
                 u, t, f = self.get_reduction(e, oe)
                 self.update_best(best, i, oi, u, t, f)
         if best["i"] is not None:
-            ne = self.get_reduction(eqs[best["i"]], eqs[best["oi"]])
+            pprint(best)
+            ne = self.combine_eqs(eqs[best["i"]], eqs[best["oi"]])
             rt_map[len(eqs)] = [best["i"], best["oi"]]
             eqs.append(ne)
             return ne

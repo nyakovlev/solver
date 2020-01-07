@@ -1,0 +1,496 @@
+# op amp I/O: out, p_in, n_in
+# mosfet I/O: gate: src: drn
+components:
+  - id: 0
+    type: vsrc
+    label: 5V
+    volts: 5
+  - id: 1
+    type: vsrc
+    label: GND
+    volts: 0
+  - id: 2
+    type: capacitor
+    label: C1
+    nf: 100
+  - id: 3
+    type: vsrc
+    label: VIN
+    volts: [6, 20]
+  - id: 4
+    type: resistor
+    label: RN1B
+    kohms: 10
+  - id: 5
+    type: resistor
+    label: RN1A
+    kohms: 10
+  - id: 6
+    type: opamp
+    label: U1A
+    pn: "lm358d"
+  - id: 7
+    type: vsrc
+    label: 3V3
+    volts: 3.3
+  - id: 8
+    type: mosfet
+    label: T1
+    channel: p
+    pn: "fdn304v"
+  - id: 9
+    type: vsrc
+    label: USBVCC
+    volts: 5
+  - id: 10
+    type: ic
+    label: U2
+    pn: "lp2985-33dbvr"
+  - id: 11
+    type: capacitor
+    label: C3
+    uf: 1
+  - id: 12
+    type: opamp
+    label: U1B
+    pn: "lm358d"
+  - id: 13
+    type: capacitor
+    label: C9
+    pf: 22
+  - id: 14
+    type: capacitor
+    label: C11
+    pf: 22
+  - id: 15
+    type: oscillator
+    label: Q1
+    mhz: 16
+  - id: 16
+    type: capacitor
+    label: C10
+    pf: 22
+  - id: 17
+    type: capacitor
+    label: C12
+    pf: 22
+  - id: 18
+    type: oscillator
+    label: Q2
+    mhz: 16
+
+  - id: 19
+    type: pin
+    group: POWER
+    label: 1
+  - id: 20
+    type: pin
+    group: POWER
+    label: 2
+  - id: 21
+    type: pin
+    group: POWER
+    label: 3
+  - id: 20
+    type: pin
+    group: POWER
+    label: 4
+  - id: 21
+    type: pin
+    group: POWER
+    label: 5
+  - id: 22
+    type: pin
+    group: POWER
+    label: 6
+
+  - id: 23
+    type: pin
+    group: IOH
+    label: 1
+  - id: 24
+    type: pin
+    group: IOH
+    label: 2
+  - id: 25
+    type: pin
+    group: IOH
+    label: 3
+  - id: 26
+    type: pin
+    group: IOH
+    label: 4
+  - id: 27
+    type: pin
+    group: IOH
+    label: 5
+  - id: 28
+    type: pin
+    group: IOH
+    label: 6
+  - id: 29
+    type: pin
+    group: IOH
+    label: 7
+  - id: 30
+    type: pin
+    group: IOH
+    label: 8
+
+  - id: 31
+    type: pin
+    group: AD
+    label: 1
+  - id: 32
+    type: pin
+    group: AD
+    label: 2
+  - id: 33
+    type: pin
+    group: AD
+    label: 3
+  - id: 34
+    type: pin
+    group: AD
+    label: 4
+  - id: 35
+    type: pin
+    group: AD
+    label: 5
+  - id: 36
+    type: pin
+    group: AD
+    label: 6
+
+  - id: 37
+    type: pin
+    group: IOL
+    label: 1
+  - id: 38
+    type: pin
+    group: IOL
+    label: 2
+  - id: 39
+    type: pin
+    group: IOL
+    label: 3
+  - id: 40
+    type: pin
+    group: IOL
+    label: 4
+  - id: 41
+    type: pin
+    group: IOL
+    label: 5
+  - id: 42
+    type: pin
+    group: IOL
+    label: 6
+  - id: 43
+    type: pin
+    group: IOL
+    label: 7
+  - id: 44
+    type: pin
+    group: IOL
+    label: 8
+
+  - id: 45
+    type: pin
+    group: ICSP
+    label: 1
+  - id: 46
+    type: pin
+    group: ICSP
+    label: 2
+  - id: 47
+    type: pin
+    group: ICSP
+    label: 3
+  - id: 48
+    type: pin
+    group: ICSP
+    label: 4
+  - id: 49
+    type: pin
+    group: ICSP
+    label: 5
+  - id: 50
+    type: pin
+    group: ICSP
+    label: 6
+
+  - id: 51
+    type: pin
+    group: ICSP1
+    label: 1
+  - id: 52
+    type: pin
+    group: ICSP1
+    label: 2
+  - id: 53
+    type: pin
+    group: ICSP1
+    label: 3
+  - id: 54
+    type: pin
+    group: ICSP1
+    label: 4
+  - id: 55
+    type: pin
+    group: ICSP1
+    label: 5
+  - id: 56
+    type: pin
+    group: ICSP1
+    label: 6
+
+  - id: 57
+    type: pin
+    group: USB
+    label: 1
+  - id: 58
+    type: pin
+    group: USB
+    label: 2
+  - id: 59
+    type: pin
+    group: USB
+    label: 3
+  - id: 60
+    type: pin
+    group: USB
+    label: 4
+  - id: 61
+    type: pin
+    group: USB
+    label: PS1
+  - id: 62
+    type: pin
+    group: USB
+    label: PS2
+
+  - id: 63
+    type: ic
+    label: U3
+    pn: "atmega8u2-mu"
+  - id: 64
+    type: ic
+    label: ZIC1
+    pn: "atmega8"
+
+  - id: 65
+    type: resistor
+    label: RN1C
+    kohms: 10
+  - id: 66
+    type: oscillator
+    label: Y1
+    mhz: 16
+  - id: 67
+    type: capacitor  # farads???
+    label: XT2
+  - id: 68
+    type: capacitor  # farads???
+    label: XT1
+  - id: 69
+    type: resistor
+    label: R3
+    ohms: 27
+  - id: 70
+    type: resistor
+    label: R1
+    mohms: 1
+  - id: 71
+    type: capacitor
+    label: C7
+    nf: 100
+
+  - id: 72
+    type: fuse
+    label: F1
+    ma: 500
+  - id: 73
+    type: resistor
+    label: RN3A
+    ohms: 22
+  - id: 74
+    type: resistor
+    label: RN3D
+    ohms: 22
+  - id: 75
+    type: varistor
+    label: Z2
+    pn: "pgb1010604"
+  - id: 76
+    type: varistor
+    label: Z1
+    pn: "pgb1010604"
+  - id: 77
+    type: ferrite
+    label: L1
+    pn: blm21
+  - id: 78
+    type: capacitor
+    label: C8
+    uf: 1
+  - id: 79
+    type: ground
+    label: GROUND
+
+connections:
+  - src: [0]
+    dst: [2, a]
+  - src: [2, b]
+    dst: [1]
+  - src: [3]
+    dst: [4, a]
+  - src: [4, b]
+    dst: [6, p_in]
+  - src: [5, a]
+    dst: [6, p_in]
+  - src: [5, n_in]
+    dst: [1]
+  - src: [7]
+    dst: [6, n_in]
+  - src: [6, out]
+    dst: [8, gate]
+  - src: [9]
+    dst: [8, src]
+  - src: [8, drn]
+    dst: [0]
+  - src: [8, drn]
+    dst: [10, 1]
+  - src: [8, drn]
+    dst: [10, 3]
+  - src: [10, 2]
+    dst: [1]
+  - src: [10, 5]
+    dst: [11, a]
+  - src: [11, b]
+    dst: [1]
+  - src: [1]
+    dst: [12, p_in]
+  - src: [1]
+    dst: [12, n_in]
+  - src: [1]
+    dst: [13, a]
+  - src: [1]
+    dst: [14, a]
+  - src: [13, b]
+    dst: [15, a]
+  - src: [14, b]
+    dst: [15, b]
+  - src: [1]
+    dst: [16, a]
+  - src: [1]
+    dst: [17, a]
+  - src: [16, b]
+    dst: [18, a]
+  - src: [17, b]
+    dst: [18, b]
+
+  - src: [51]
+    dst: [63, 17]
+  - src: [52]
+    dst: [0]
+  - src: [52]
+    dst: [65, a]
+  - src: [65, b]
+    dst: [63, 24]
+  - src: [53]
+    dst: [63, 15]
+  - src: [54]
+    dst: [63, 16]
+  - src: [55]
+    dst: [63, 24]
+  - src: [56]
+    dst: [1]
+
+  - src: [63, 2]
+    dst: [66, a]
+  - src: [66, a]
+    dst: [67, a]
+  - src: [67, b]
+    dst: [1]
+  - src: [63, 1]
+    dst: [69, a]
+  - src: [69, b]
+    dst: [66, b]
+  - src: [69, b]
+    dst: [70, a]
+  - src: [70, b]
+    dst: [66, a]
+  - src: [66, b]
+    dst: [68, a]
+  - src: [68, b]
+    dst: [1]
+
+  - src: [63, 32]
+    dst: [0]
+  - src: [63, 32]
+    dst: [63, 4]
+  - src: [63, 4]
+    dst: [71, a]
+  - src: [71, b]
+    dst: [1]
+
+  - src: [57]
+    dst: [72, a]
+  - src: [72, b]
+    dst: [9]
+  - src: [58]
+    dst: [73, a]
+  - src: [73, b]
+    dst: [63, 30]
+  - src: [59]
+    dst: [74, a]
+  - src: [74, b]
+    dst: [63, 29]
+  - src: [58]
+    dst: [75, a]
+  - src: [75, b]
+    dst: [77, a]
+  - src: [59]
+    dst: [76, a]
+  - src: [76, b]
+    dst: [77, a]
+  - src: [61]
+    dst: [77, a]
+  - src: [62]
+    dst: [77, a]
+  - src: [60]
+    dst: [77, b]
+  - src: [60]
+    dst: [63, 28]
+  - src: [60]
+    dst: [78, a]
+  - src: [78, b]
+    dst: [63, 27]
+  - src: [60]
+    dst: [79, 2]
+  - src: [79, 1]
+    dst: [63, exp]
+  - src: [79, 1]
+    dst: [1]
+  - src: [63, 3]
+    dst: [1]
+
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
+  - src: []
+    dst: []
