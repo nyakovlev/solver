@@ -744,10 +744,10 @@
 - id: w_95
   type: connection
   src: [63, 11]
-  dst: [84, a]
+  dst: [84, n]
 - id: w_96
   type: connection
-  src: [84, b]
+  src: [84, p]
   dst: [85, a]
 - id: w_97
   type: connection
@@ -764,10 +764,10 @@
 - id: w_98
   type: connection
   src: [63, 10]
-  dst: [86, a]
+  dst: [86, n]
 - id: w_99
   type: connection
-  src: [86, b]
+  src: [86, p]
   dst: [87, a]
 - id: w_100
   type: connection
@@ -1001,14 +1001,14 @@
 - id: w_142
   type: connection
   src: [101, b]
-  dst: [100, b]
+  dst: [100, p]
 - id: w_143
   type: connection
   src: [102, b]
-  dst: [100, b]
+  dst: [100, p]
 - id: w_144
   type: connection
-  src: [100, a]
+  src: [100, n]
   dst: [1]
 
 - id: 103
@@ -1034,14 +1034,14 @@
 - id: w_147
   type: connection
   src: [104, b]
-  dst: [103, b]
+  dst: [103, p]
 - id: w_148
   type: connection
   src: [105, b]
-  dst: [103, b]
+  dst: [103, p]
 - id: w_149
   type: connection
-  src: [103, a]
+  src: [103, n]
   dst: [1]
 
 - id: 106
@@ -1080,14 +1080,14 @@
 - id: w_151
   type: connection
   src: [106, 2]
-  dst: [107, b]
+  dst: [107, p]
 - id: w_152
   type: connection
   src: [106, 3]
   dst: [1]
 - id: w_153
   type: connection
-  src: [107, a]
+  src: [107, n]
   dst: [109, 3]
 - id: w_154
   type: connection
