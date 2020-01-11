@@ -1,0 +1,9 @@
+- id: 0
+  type: form_factor
+  name: "QFN32"
+- id: 1
+  type: form_factor
+  name: "TQFP32"
+- id: 2
+  type: form_factor
+  name: "VQFP32"
