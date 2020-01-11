@@ -1,3 +1,4 @@
+# Uses a set of flags (k, rdh?, rdl?, rr?, rd?, r0?), a set of registers, pc (for jump), stack, set_io, and set_flag
 - id: 0
   type: instruction
   mnemonic: add
@@ -540,3 +541,523 @@
   f: "set_io(p, b, 0)"
   flags: []
   clocks: 2
+- id: 64
+  type: instruction
+  mnemonic: lsl
+  class: bit
+  inputs: [rd]
+  f: "rd = rd << 1"
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 64
+  type: instruction
+  mnemonic: lsr
+  class: bit
+  inputs: [rd]
+  f: "rd = rd >> 1"
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 65
+  type: instruction
+  mnemonic: rol
+  class: bit
+  inputs: [rd]
+  f: ["c = rd >> 7 & 1", "rd = (rd << 1) | c"]
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 66
+  type: instruction
+  mnemonic: ror
+  class: bit
+  inputs: [rd]
+  f: ["c = rd & 1", "rd = (rd >> 1) | (c << 7)"]
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 67
+  type: instruction
+  mnemonic: asr
+  class: bit
+  inputs: [rd]
+  f: "rd = (rd >> 1) | (rd & 128)"
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 68
+  type: instruction
+  mnemonic: swap
+  class: bit
+  inputs: [rd]
+  f: "rd = (rd << 4) | (rd & 240) >> 4"
+  flags: []
+  clocks: 1
+- id: 69
+  type: instruction
+  mnemonic: bset
+  class: bit
+  inputs: [s]
+  f: "set_flag(s, 1)"
+  flags: ["get_flag(s)"]
+  clocks: 1
+- id: 70
+  type: instruction
+  mnemonic: bclr
+  class: bit
+  inputs: [s]
+  f: "set_flag(s, 0)"
+  flags: ["get_flag(s)"]
+  clocks: 1
+- id: 71
+  type: instruction
+  mnemonic: bst
+  class: bit
+  inputs: [rr, b]
+  f: "t = rr >> b & 1"
+  flags: [t]
+  clocks: 1
+- id: 72
+  type: instruction
+  mnemonic: bld
+  class: bit
+  inputs: [rr, b]
+  f: "rd = rd | (t << b)"
+  flags: []
+  clocks: 1
+- id: 73
+  type: instruction
+  mnemonic: sec
+  class: bit
+  inputs: []
+  f: "c = 1"
+  flags: [c]
+  clocks: 1
+- id: 74
+  type: instruction
+  mnemonic: clc
+  class: bit
+  inputs: []
+  f: "c = 0"
+  flags: [c]
+  clocks: 1
+- id: 75
+  type: instruction
+  mnemonic: sen
+  class: bit
+  inputs: []
+  f: "n = 1"
+  flags: [n]
+  clocks: 1
+- id: 76
+  type: instruction
+  mnemonic: cln
+  class: bit
+  inputs: []
+  f: "n = 0"
+  flags: [n]
+  clocks: 1
+- id: 77
+  type: instruction
+  mnemonic: sez
+  class: bit
+  inputs: []
+  f: "z = 1"
+  flags: [z]
+  clocks: 1
+- id: 78
+  type: instruction
+  mnemonic: clz
+  class: bit
+  inputs: []
+  f: "z = 0"
+  flags: [z]
+  clocks: 1
+- id: 79
+  type: instruction
+  mnemonic: sei
+  class: bit
+  inputs: []
+  f: "i = 1"
+  flags: [i]
+  clocks: 1
+- id: 80
+  type: instruction
+  mnemonic: cli
+  class: bit
+  inputs: []
+  f: "i = 0"
+  flags: [i]
+  clocks: 1
+- id: 81
+  type: instruction
+  mnemonic: ses
+  class: bit
+  inputs: []
+  f: "s = 1"
+  flags: [s]
+  clocks: 1
+- id: 82
+  type: instruction
+  mnemonic: cls
+  class: bit
+  inputs: []
+  f: "s = 0"
+  flags: [s]
+  clocks: 1
+- id: 83
+  type: instruction
+  mnemonic: sev
+  class: bit
+  inputs: []
+  f: "v = 1"
+  flags: [v]
+  clocks: 1
+- id: 84
+  type: instruction
+  mnemonic: clv
+  class: bit
+  inputs: []
+  f: "v = 0"
+  flags: [v]
+  clocks: 1
+- id: 85
+  type: instruction
+  mnemonic: set
+  class: bit
+  inputs: []
+  f: "t = 1"
+  flags: [t]
+  clocks: 1
+- id: 86
+  type: instruction
+  mnemonic: clt
+  class: bit
+  inputs: []
+  f: "t = 0"
+  flags: [t]
+  clocks: 1
+- id: 87
+  type: instruction
+  mnemonic: seh
+  class: bit
+  inputs: []
+  f: "h = 1"
+  flags: [h]
+  clocks: 1
+- id: 88
+  type: instruction
+  mnemonic: clh
+  class: bit
+  inputs: []
+  f: "h = 0"
+  flags: [h]
+  clocks: 1
+- id: 89
+  type: instruction
+  mnemonic: mov
+  class: transfer
+  inputs: [rd, rr]
+  f: "rd = rr"
+  flags: []
+  clocks: 1
+- id: 90
+  type: instruction
+  mnemonic: movw
+  class: transfer
+  inputs: [rd, rr]
+  f: "(rd+1):rd = (rr+1):rr"
+  flags: []
+  clocks: 1
+- id: 91
+  type: instruction
+  mnemonic: ldi
+  class: transfer
+  inputs: [rd, K]
+  f: "rd = K"
+  flags: []
+  clocks: 1
+- id: 91
+  type: instruction
+  mnemonic: ld_x
+  class: transfer
+  inputs: [rd, X]
+  f: "rd = (X)"
+  flags: []
+  clocks: 2
+- id: 92
+  type: instruction
+  mnemonic: ld_x_post_inc
+  class: transfer
+  inputs: [rd, X]
+  f: ["rd = (X)", "X += 1"]
+  flags: []
+  clocks: 2
+- id: 93
+  type: instruction
+  mnemonic: ld_x_pre_dec
+  class: transfer
+  inputs: [rd, X]
+  f: ["X -= 1", "rd = (X)"]
+  flags: []
+  clocks: 2
+- id: 94
+  type: instruction
+  mnemonic: ld_y
+  class: transfer
+  inputs: [rd, Y]
+  f: "rd = (Y)"
+  flags: []
+  clocks: 2
+- id: 95
+  type: instruction
+  mnemonic: ld_y_post_inc
+  class: transfer
+  inputs: [rd, Y]
+  f: ["rd = (Y)", "Y += 1"]
+  flags: []
+  clocks: 2
+- id: 96
+  type: instruction
+  mnemonic: ld_y_pre_dec
+  class: transfer
+  inputs: [rd, Y]
+  f: ["Y -= 1", "rd = (Y)"]
+  flags: []
+  clocks: 2
+- id: 97
+  type: instruction
+  mnemonic: ld_z
+  class: transfer
+  inputs: [rd, Z]
+  f: "rd = (Z)"
+  flags: []
+  clocks: 2
+- id: 98
+  type: instruction
+  mnemonic: ld_z_post_inc
+  class: transfer
+  inputs: [rd, Z]
+  f: ["rd = (Z)", "Z += 1"]
+  flags: []
+  clocks: 2
+- id: 99
+  type: instruction
+  mnemonic: ld_z_pre_dec
+  class: transfer
+  inputs: [rd, Z]
+  f: ["Z -= 1", "rd = (Z)"]
+  flags: []
+  clocks: 2
+- id: 100
+  type: instruction
+  mnemonic: ldd_y
+  class: transfer
+  inputs: [rd, Y, q]
+  f: "rd = (Y + q)"
+  flags: []
+  clocks: 2
+- id: 101
+  type: instruction
+  mnemonic: ldd_z
+  class: transfer
+  inputs: [rd, Z, q]
+  f: "rd = (Z + q)"
+  flags: []
+  clocks: 2
+- id: 102
+  type: instruction
+  mnemonic: lds
+  class: transfer
+  inputs: [rd, k]
+  f: "rd = (k)"
+  flags: []
+  clocks: 2
+- id: 103
+  type: instruction
+  mnemonic: st_x
+  class: transfer
+  inputs: [rr, X]
+  f: "(X) = rr"
+  flags: []
+  clocks: 2
+- id: 103
+  type: instruction
+  mnemonic: st_x_post_inc
+  class: transfer
+  inputs: [rr, X]
+  f: ["(X) = rr", "X += 1"]
+  flags: []
+  clocks: 2
+- id: 104
+  type: instruction
+  mnemonic: st_x_pre_dec
+  class: transfer
+  inputs: [rr, X]
+  f: ["X -= 1", "(X) = rr"]
+  flags: []
+  clocks: 2
+- id: 105
+  type: instruction
+  mnemonic: st_y
+  class: transfer
+  inputs: [rr, Y]
+  f: "(Y) = rr"
+  flags: []
+  clocks: 2
+- id: 106
+  type: instruction
+  mnemonic: st_y_post_inc
+  class: transfer
+  inputs: [rr, Y]
+  f: ["(Y) = rr", "Y += 1"]
+  flags: []
+  clocks: 2
+- id: 107
+  type: instruction
+  mnemonic: st_y_pre_dec
+  class: transfer
+  inputs: [rr, Y]
+  f: ["Y -= 1", "(Y) = rr"]
+  flags: []
+  clocks: 2
+- id: 108
+  type: instruction
+  mnemonic: st_y_dsp
+  class: transfer
+  inputs: [rr, Y, q]
+  f: "(Y + q) = rr"
+  flags: []
+  clocks: 2
+- id: 109
+  type: instruction
+  mnemonic: st_z
+  class: transfer
+  inputs: [rr, Z]
+  f: "(Z) = rr"
+  flags: []
+  clocks: 2
+- id: 110
+  type: instruction
+  mnemonic: st_z_post_inc
+  class: transfer
+  inputs: [rr, Z]
+  f: ["(Z) = rr", "Z += 1"]
+  flags: []
+  clocks: 2
+- id: 111
+  type: instruction
+  mnemonic: st_z_pre_dec
+  class: transfer
+  inputs: [rr, Z]
+  f: ["Z -= 1", "(Z) = rr"]
+  flags: []
+  clocks: 2
+- id: 112
+  type: instruction
+  mnemonic: st_z_dsp
+  class: transfer
+  inputs: [rr, Z, q]
+  f: "(Z + q) = rr"
+  flags: []
+  clocks: 2
+- id: 113
+  type: instruction
+  mnemonic: sts
+  class: transfer
+  inputs: [k, rr]
+  f: "(k) = rr"
+  flags: []
+  clocks: 2
+- id: 114
+  type: instruction
+  mnemonic: lpm_r0
+  class: transfer
+  inputs: [Z]
+  f: "r0 = (Z)"
+  flags: []
+  clocks: 3
+- id: 115
+  type: instruction
+  mnemonic: lpm_rd
+  class: transfer
+  inputs: [rd, Z]
+  f: "rd = (Z)"
+  flags: []
+  clocks: 3
+- id: 116
+  type: instruction
+  mnemonic: lpm_rd_post_inc
+  class: transfer
+  inputs: [rd, Z]
+  f: ["rd = (Z)", "Z += 1"]
+  flags: []
+  clocks: 3
+- id: 117
+  type: instruction
+  mnemonic: spm
+  class: transfer
+  inputs: [Z]
+  f: "(Z) = r1:r0"
+  flags: []
+  clocks: null
+- id: 118
+  type: instruction
+  mnemonic: in
+  class: transfer
+  inputs: [rd, P]
+  f: "rd = P"
+  flags: []
+  clocks: 1
+- id: 119
+  type: instruction
+  mnemonic: out
+  class: transfer
+  inputs: [rr, P]
+  f: "P = rr"
+  flags: []
+  clocks: 1
+- id: 120
+  type: instruction
+  mnemonic: push
+  class: transfer
+  inputs: [rr]
+  f: "stack = rr"
+  flags: []
+  clocks: 2
+- id: 121
+  type: instruction
+  mnemonic: pop
+  class: transfer
+  inputs: [rd]
+  f: "rd = stack"
+  flags: []
+  clocks: 2
+- id: 122
+  type: instruction
+  mnemonic: nop
+  class: mcu
+  inputs: []
+  f: null
+  flags: []
+  clocks: 1
+- id: 123
+  type: instruction
+  mnemonic: sleep
+  class: mcu
+  inputs: []
+  f: null
+  flags: []
+  clocks: 1
+- id: 124
+  type: instruction
+  mnemonic: wdr
+  class: mcu
+  inputs: []
+  f: null
+  flags: []
+  clocks: 1
+- id: 125
+  type: instruction
+  mnemonic: break
+  class: mcu
+  inputs: []
+  f: null
+  flags: []
+  clocks: null
