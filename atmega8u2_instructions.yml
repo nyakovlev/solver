@@ -1,0 +1,542 @@
+- id: 0
+  type: instruction
+  mnemonic: add
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd + rr"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 1
+  type: instruction
+  mnemonic: adc
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd + rr + c"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 2
+  type: instruction
+  mnemonic: adiw
+  class: arithmetic
+  inputs: ["rdh:rdl", k]
+  outputs: ["rdh:rdl"]
+  f: "rdh:rdl = rdh:rdl + k"
+  flags: [z,c,v,n,s]
+  clocks: 2
+- id: 3
+  type: instruction
+  mnemonic: sub
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd - rr"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 4
+  type: instruction
+  mnemonic: subi
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd - k"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 5
+  type: instruction
+  mnemonic: sbc
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd - rr - c"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 6
+  type: instruction
+  mnemonic: sbci
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd - k - c"
+  flags: [z,c,v,n,h]
+  clocks: 1
+- id: 7
+  type: instruction
+  mnemonic: sbiw
+  class: arithmetic
+  inputs: ["rdh:rdl", k]
+  outputs: ["rdh:rdl"]
+  f: "rdh:rdl = rdh:rdl + k"
+  flags: [z,c,v,n,s]
+  clocks: 2
+- id: 8
+  type: instruction
+  mnemonic: and
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd & rr"
+  flags: [z,n,v]
+  clocks: 1
+- id: 9
+  type: instruction
+  mnemonic: andi
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd & k"
+  flags: [z,n,v]
+  clocks: 1
+- id: 10
+  type: instruction
+  mnemonic: or
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd | rr"
+  flags: [z,n,v]
+  clocks: 1
+- id: 11
+  type: instruction
+  mnemonic: ori
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd | k"
+  flags: [z,n,v]
+  clocks: 1
+- id: 12
+  type: instruction
+  mnemonic: eor
+  class: arithmetic
+  inputs: [rd, rr]
+  outputs: [rd]
+  f: "rd = rd ^ rr"
+  flags: [z,n,v]
+  clocks: 1
+- id: 13
+  type: instruction
+  mnemonic: com
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = 255 - rd"
+  flags: [z,c,n,v]
+  clocks: 1
+- id: 14
+  type: instruction
+  mnemonic: neg
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = 0 - rd"
+  flags: [z,c,n,v,h]
+  clocks: 1
+- id: 15
+  type: instruction
+  mnemonic: sbr
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd | k"
+  flags: [z,n,v]
+  clocks: 1
+- id: 16
+  type: instruction
+  mnemonic: cbr
+  class: arithmetic
+  inputs: [rd, k]
+  outputs: [rd]
+  f: "rd = rd & (255 - k)"
+  flags: [z,n,v]
+  clocks: 1
+- id: 17
+  type: instruction
+  mnemonic: inc
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = rd + 1"
+  flags: [z,n,v]
+  clocks: 1
+- id: 18
+  type: instruction
+  mnemonic: dec
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = rd - 1"
+  flags: [z,n,v]
+  clocks: 1
+- id: 19
+  type: instruction
+  mnemonic: tst
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = rd & rd"
+  flags: [z,n,v]
+  clocks: 1
+- id: 20
+  type: instruction
+  mnemonic: clr
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = rd ^ rd"
+  flags: [z,n,v]
+  clocks: 1
+- id: 21
+  type: instruction
+  mnemonic: ser
+  class: arithmetic
+  inputs: [rd]
+  outputs: [rd]
+  f: "rd = 255"
+  flags: []
+  clocks: 1
+- id: 22
+  type: instruction
+  mnemonic: rjmp
+  class: branch
+  inputs: [k]
+  f: "pc = pc + k + 1"
+  flags: []
+  clocks: 2
+- id: 23
+  type: instruction
+  mnemonic: ijmp
+  class: branch
+  inputs: []
+  f: "pc = z"
+  flags: []
+  clocks: 2
+- id: 24
+  type: instruction
+  mnemonic: jmp
+  class: branch
+  inputs: [k]
+  f: "pc = k"
+  flags: []
+  clocks: 3
+- id: 25
+  type: instruction
+  mnemonic: rcall
+  class: branch
+  inputs: [k]
+  f: "pc = pc + k + 1"
+  flags: []
+  clocks: 4
+- id: 26
+  type: instruction
+  mnemonic: icall
+  class: branch
+  inputs: []
+  f: "pc = z"
+  flags: []
+  clocks: 4
+- id: 27
+  type: instruction
+  mnemonic: call
+  class: branch
+  inputs: [k]
+  f: "pc = k"
+  flags: []
+  clocks: 5
+- id: 28
+  type: instruction
+  mnemonic: ret
+  class: branch
+  inputs: []
+  f: "pc = stack"
+  flags: []
+  clocks: 5
+- id: 29
+  type: instruction
+  mnemonic: reti
+  class: branch
+  inputs: []
+  f: "pc = stack"
+  flags: [i]
+  clocks: 5
+- id: 30
+  type: instruction
+  mnemonic: cpse_1w
+  class: branch
+  inputs: [rd, rr]
+  f: "pc = pc + 2 if rd == rr else pc"
+  flags: []
+  clocks: [1,2]
+- id: 31
+  type: instruction
+  mnemonic: cpse_2w
+  class: branch
+  inputs: [rd, rr]
+  f: "pc = pc + 3 if rd == rr else pc"
+  flags: []
+  clocks: [1,3]
+- id: 32
+  type: instruction
+  mnemonic: cp
+  class: branch
+  inputs: [rd,rr]
+  f: "rd == rr"
+  flags: [z,n,v,c,h]
+  clocks: 1
+- id: 33
+  type: instruction
+  mnemonic: cpc
+  class: branch
+  inputs: [rd,rr]
+  f: "rd == rr && rd == c"
+  flags: [z,n,v,c,h]
+  clocks: 1
+- id: 34
+  type: instruction
+  mnemonic: cpi
+  class: branch
+  inputs: [rd, k]
+  f: "rd == k"
+  flags: [z,n,v,c,h]
+  clocks: 1
+- id: 35
+  type: instruction
+  mnemonic: sbrc_1w
+  class: branch
+  inputs: [rr, b]
+  f: "pc = pc if rr >> b & 1 else pc + 2"
+  flags: []
+  clocks: [1,2]
+- id: 36
+  type: instruction
+  mnemonic: sbrc_2w
+  class: branch
+  inputs: [rr, b]
+  f: "pc = pc if rr >> b & 1 else pc + 3"
+  flags: []
+  clocks: [1,3]
+- id: 37
+  type: instruction
+  mnemonic: sbrs_1w
+  class: branch
+  inputs: [rr, b]
+  f: "pc = pc + 2 if rr >> b & 1 else pc"
+  flags: []
+  clocks: [1,2]
+- id: 38
+  type: instruction
+  mnemonic: sbrs_2w
+  class: branch
+  inputs: [rr, b]
+  f: "pc = pc + 3 if rr >> b & 1 else pc"
+  flags: []
+  clocks: [1,3]
+- id: 39
+  type: instruction
+  mnemonic: sbic_1w
+  class: branch
+  inputs: [p, b]
+  f: "pc = pc if p >> b & 1 else pc + 2"
+  flags: []
+  clocks: [1,2]
+- id: 40
+  type: instruction
+  mnemonic: sbic_2w
+  class: branch
+  inputs: [p, b]
+  f: "pc = pc if p >> b & 1 else pc + 3"
+  flags: []
+  clocks: [1,3]
+- id: 41
+  type: instruction
+  mnemonic: sbis_1w
+  class: branch
+  inputs: [p, b]
+  f: "pc = pc + 2 if p >> b & 1 else pc"
+  flags: []
+  clocks: [1,2]
+- id: 42
+  type: instruction
+  mnemonic: sbis_2w
+  class: branch
+  inputs: [p, b]
+  f: "pc = pc + 3 if p >> b & 1 else pc"
+  flags: []
+  clocks: [1,3]
+- id: 43
+  type: instruction
+  mnemonic: brbs
+  class: branch
+  inputs: [s,k]
+  f: "pc = (pc + k + 1) if sreg >> s & 1 else pc"
+  flags: []
+  clocks: [1,2]
+- id: 44
+  type: instruction
+  mnemonic: brbc
+  class: branch
+  inputs: [s,k]
+  f: "pc = pc if sreg >> s & 1 else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 45
+  type: instruction
+  mnemonic: breq
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if z else pc"
+  flags: []
+  clocks: [1,2]
+- id: 46
+  type: instruction
+  mnemonic: brne
+  class: branch
+  inputs: [k]
+  f: "pc = pc if z else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 47
+  type: instruction
+  mnemonic: brcs
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if c else pc"
+  flags: []
+  clocks: [1,2]
+- id: 48
+  type: instruction
+  mnemonic: brcc
+  class: branch
+  inputs: [k]
+  f: "pc = pc if c else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 49
+  type: instruction
+  mnemonic: brsh
+  class: branch
+  inputs: [k]
+  f: "pc = pc if c else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 50
+  type: instruction
+  mnemonic: brlo
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if c else pc"
+  flags: []
+  clocks: [1,2]
+- id: 51
+  type: instruction
+  mnemonic: brmi
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if n else pc"
+  flags: []
+  clocks: [1,2]
+- id: 52
+  type: instruction
+  mnemonic: brpl
+  class: branch
+  inputs: [k]
+  f: "pc = pc if n else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 52
+  type: instruction
+  mnemonic: brge
+  class: branch
+  inputs: [k]
+  f: "pc = pc if (n ^ v) else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 53
+  type: instruction
+  mnemonic: brlt
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if (n ^ v) else pc"
+  flags: []
+  clocks: [1,2]
+- id: 54
+  type: instruction
+  mnemonic: brhs
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if h else pc"
+  flags: []
+  clocks: [1,2]
+- id: 55
+  type: instruction
+  mnemonic: brhc
+  class: branch
+  inputs: [k]
+  f: "pc = pc if h else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 56
+  type: instruction
+  mnemonic: brts
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if t else pc"
+  flags: []
+  clocks: [1,2]
+- id: 57
+  type: instruction
+  mnemonic: brtc
+  class: branch
+  inputs: [k]
+  f: "pc = pc if t else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 58
+  type: instruction
+  mnemonic: brvs
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if v else pc"
+  flags: []
+  clocks: [1,2]
+- id: 59
+  type: instruction
+  mnemonic: brvc
+  class: branch
+  inputs: [k]
+  f: "pc = pc if v else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 60
+  type: instruction
+  mnemonic: brie
+  class: branch
+  inputs: [k]
+  f: "pc = (pc + k + 1) if i else pc"
+  flags: []
+  clocks: [1,2]
+- id: 61
+  type: instruction
+  mnemonic: brid
+  class: branch
+  inputs: [k]
+  f: "pc = pc if i else (pc + k + 1)"
+  flags: []
+  clocks: [1,2]
+- id: 62
+  type: instruction
+  mnemonic: sbi
+  class: bit
+  inputs: [p,b]
+  f: "set_io(p, b, 1)"
+  flags: []
+  clocks: 2
+- id: 63
+  type: instruction
+  mnemonic: sbi
+  class: bit
+  inputs: [p,b]
+  f: "set_io(p, b, 0)"
+  flags: []
+  clocks: 2
