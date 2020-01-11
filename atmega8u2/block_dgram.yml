@@ -1,0 +1,478 @@
+- id: 0
+  type: bus
+  width: 8
+  name: "DA TA BUS"
+- id: 1
+  type: block
+  name: "port drivers"
+- id: 2
+  type: pin_group
+  pins: [p0, p1, p2, p3, p4, p5, p6, p7]
+- id: 3
+  type: block
+  name: "data register"
+- id: 4
+  type: block
+  name: "data dir. reg."
+- id: lnk_0
+  type: link
+  bidi: true
+  src: [3]
+  dst: [1]
+- id: lnk_1
+  type: link
+  bidi: false
+  src: [4]
+  dst: [1]
+- id: lnk_2
+  type: link
+  bidi: true
+  src: [1]
+  dst: [2]
+- id: lnk_3
+  type: link
+  bidi: true
+  src: [3]
+  dst: [0]
+- id: lnk_4
+  type: link
+  bidi: true
+  src: [4]
+  dst: [0]
+- id: 5
+  type: group
+  members: [1, 2, 3, 4, lnk_0, lnk_1, lnk_2, lnk_3, lnk_4]
+
+- id: 6
+  type: grp_inst
+  group: 5
+  name: d
+- id: 7
+  type: grp_inst
+  group: 5
+  name: c
+- id: 8
+  type: grp_inst
+  group: 5
+  name: b
+
+- id: 9
+  type: wire
+  name: XTAL1
+- id: 10
+  type: wire
+  name: XTAL2
+- id: 11
+  type: wire
+  name: RESET
+- id: 12
+  type: wire
+  name: VCC
+- id: 13
+  type: wire
+  name: GND
+- id: 14
+  type: wire
+  name: UVCC
+- id: 15
+  type: wire
+  name: UCAP
+- id: 16
+  type: wire
+  name: "D+"
+- id: 17
+  type: wire
+  name: "D-"
+
+- id: 18
+  type: block
+  name: "por - bod reset"
+- id: 19
+  type: block
+  name: "watchdog timer"
+- id: lnk_5
+  type: link
+  src: [12]
+  dst: [18]
+- id: lnk_6
+  type: link
+  src: [11]
+  dst: [18]
+- id: lnk_7
+  type: link
+  bidi: false
+  src: [19]
+  dst: [18]
+
+- id: 20
+  type: block
+  name: "internal oscillator"
+- id: 21
+  type: block
+  name: "timing and control"
+- id: lnk_8
+  type: link
+  src: [19]
+  dst: [0]
+- id: lnk_9
+  type: link
+  bidi: false
+  src: [19]
+  dst: [21]
+- id: lnk_9
+  type: link
+  bidi: false
+  src: [20]
+  dst: [19]
+
+- id: 22
+  type: comparator
+- id: lnk_10
+  type: link
+  src: [22, p]
+  dst: [6, 2, p1]
+- id: lnk_11
+  type: link
+  src: [22, n]
+  dst: [6, 2, p2]
+- id: 23
+  type: block
+  name: "interrupt unit"
+- id: lnk_12
+  type: link
+  src: [22, out]
+  dst: [23]
+- id: lnk_13
+  type: link
+  src: [23]
+  dst: [0]
+- id: lnk_14
+  type: link
+  src: [23]
+  dst: [21]
+
+- id: 24
+  type: block
+  name: "calib. osc"
+- id: 25
+  type: block
+  name: "oscillator"
+- id: lnk_15
+  type: link
+  bidi: false
+  src: [24]
+  dst: [21]
+- id: lnk_16
+  type: link
+  bidi: false
+  src: [25]
+  dst: [21]
+
+- id: 26
+  type: block
+  name: "mcu control register"
+- id: lnk_17
+  type: link
+  src: [26]
+  dst: [0]
+- id: lnk_18
+  type: link
+  bidi: false
+  src: [26]
+  dst: [21]
+
+- id: lnk_19
+  type: link
+  bidi: false
+  src: [21]
+  dst: [11]
+- id: lnk_20
+  type: link
+  src: [9]
+  dst: [25]
+- id: lnk_21
+  type: link
+  src: [10]
+  dst: [25]
+
+- id: 26
+  type: block
+  name: "pll"
+- id: 27
+  type: block
+  name: "timer/counters"
+- id: lnk_22
+  type: link
+  src: [26]
+  dst: [0]
+- id: lnk_23
+  type: link
+  src: [27]
+  dst: [0]
+- id: lnk_24
+  type: link
+  src: [26]
+  dst: [21]
+- id: lnk_25
+  type: link
+  src: [27]
+  dst: [21]
+
+- id: 28
+  type: block
+  name: "on-chip 3.3v regulator"
+- id: 29
+  type: block
+  name: "usb"
+- id: 30
+  type: block
+  name: "ps/2"
+- id: lnk_26
+  type: link
+  src: [28]
+  dst: [14]
+- id: lnk_27
+  type: link
+  src: [28]
+  dst: [15]
+- id: lnk_28
+  type: link
+  bidi: false
+  src: [28]
+  dst: [29]
+- id: lnk_29
+  type: link
+  src: [29]
+  dst: [0]
+- id: lnk_30
+  type: link
+  src: [30]
+  dst: [0]
+- id: lnk_31
+  type: link
+  src: [29]
+  dst: [26]
+- id: lnk_32
+  type: link
+  src: [29]
+  dst: [16]
+- id: lnk_33
+  type: link
+  src: [29]
+  dst: [17]
+- id: lnk_32
+  type: link
+  src: [30]
+  dst: [16]
+- id: lnk_33
+  type: link
+  src: [30]
+  dst: [17]
+
+- id: 31
+  type: block
+  name: "usart1"
+- id: lnk_34
+  type: link
+  src: [31]
+  dst: [0]
+- id: lnk_35
+  type: link
+  src: [31]
+  dst: [6, 3]
+
+- id: 32
+  type: block
+  name: "spi"
+- id: 33
+  type: block
+  name: "programming logic"
+- id: 34
+  type: block
+  name: "eeprom"
+- id: lnk_36
+  type: link
+  src: [32]
+  dst: [0]
+- id: lnk_37
+  type: link
+  src: [31]
+  dst: [6, 3]
+- id: lnk_38
+  type: link
+  src: [32]
+  dst: [33]
+- id: lnk_39
+  type: link
+  src: [32]
+  dst: [8, 3]
+- id: lnk_40
+  type: link
+  src: [33]
+  dst: [34]
+- id: lnk_41
+  type: link
+  src: [34]
+  dst: [0]
+
+- id: 35
+  type: block
+  name: "debug-wire"
+- id: 36
+  type: block
+  name: "on-chip debug"
+- id: 37
+  type: block
+  name: "program counter"
+- id: 38
+  type: block
+  name: "program flash"
+- id: 39
+  type: block
+  name: "instruction register"
+- id: 40
+  type: block
+  name: "instruction decoder"
+- id: 41
+  type: block
+  name: "control lines"
+- id: 42
+  type: block
+  name: "stack pointer"
+- id: 43
+  type: block
+  name: "sram"
+- id: 44
+  type: block
+  name: "general purpose registers"
+- id: 45
+  type: block
+  name: "alu"
+- id: 46
+  type: block
+  name: "status register"
+
+- id: lnk_42
+  type: link
+  src: [46]
+  dst: [0]
+- id: lnk_43
+  type: link
+  src: [45]
+  dst: [0]
+- id: lnk_44
+  type: link
+  src: [44]
+  dst: [0]
+- id: lnk_45
+  type: link
+  src: [45]
+  dst: [46]
+- id: lnk_46
+  type: link
+  src: [44]
+  dst: [45]
+
+- id: lnk_42
+  type: link
+  src: [46]
+  dst: [0]
+- id: lnk_43
+  type: link
+  src: [45]
+  dst: [0]
+- id: lnk_44
+  type: link
+  src: [44]
+  dst: [0]
+- id: lnk_47
+  type: link
+  src: [43]
+  dst: [0]
+- id: lnk_48
+  type: link
+  src: [42]
+  dst: [0]
+- id: lnk_49
+  type: link
+  src: [37]
+  dst: [0]
+
+- id: lnk_50
+  type: link
+  src: [44]
+  dst: [37]
+- id: lnk_51
+  type: link
+  src: [39]
+  dst: [43]
+- id: lnk_52
+  type: link
+  src: [39]
+  dst: [44]
+- id: lnk_53
+  type: link
+  src: [44]
+  dst: [43]
+- id: lnk_54
+  type: link
+  src: [39]
+  dst: [40]
+- id: lnk_55
+  type: link
+  src: [40]
+  dst: [41]
+- id: lnk_56
+  type: link
+  src: [42]
+  dst: [43]
+- id: lnk_57
+  type: link
+  src: [33]
+  dst: [37]
+- id: lnk_58
+  type: link
+  src: [33]
+  dst: [38]
+
+- id: lnk_59
+  type: link
+  src: [33]
+  dst: [38]
+- id: lnk_60
+  type: link
+  src: [33]
+  dst: [38]
+- id: lnk_61
+  type: link
+  src: [33]
+  dst: [38]
+- id: lnk_62
+  type: link
+  src: [33]
+  dst: [38]
+
+- id: lnk_63
+  type: link
+  src: [37]
+  dst: [38]
+- id: lnk_64
+  type: link
+  src: [38]
+  dst: [39]
+
+- id: 47
+  type: intercept
+  link: lnk_63
+- id: 48
+  type: intercept
+  link: lnk_64
+
+- id: lnk_64
+  type: link
+  src: [36]
+  dst: [47]
+- id: lnk_64
+  type: link
+  src: [48]
+  dst: [36]
