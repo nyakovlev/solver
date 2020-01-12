@@ -204,7 +204,6 @@
 - id: ext_1
   type: extrude
   sketch: sk_1
-
 - id: d_13
   type: dim
   dtype: distance
@@ -214,21 +213,26 @@
     min: 0.05
     nom: 0.20
     max: 1.05
-
 - id: ref_0
   type: reference
-
 - id: mp_1
   type: midpoint
   line: [line_4]
   point: [ref_0]
+- id: gp_1
+  type: group
+  members:
+    - ext_1
+    - d_13
+    - ref_0
+    - mp_1
 
 # pinnnnsuh
 - id: arr_0
   type: array
-  feature: [ext_1]
-  reference: ref_0
-  axis_line: line_4
+  feature: [gp_1]
+  reference: [ref_0]
+  axis_line: [ext_1, sk_1, line_4]
 - id: cst_0
   type: cst
   param: [arr_0, ct]
@@ -303,3 +307,16 @@
     z:
       min: -0.05
       max: 0
+
+# assembly
+- id: asm_0
+  type: assembly
+  cmps:
+    - pins_cp_0
+    - pins_mp_0
+    - pins_cp_1
+    - pins_mp_1
+    - pins_cp_2
+    - pins_mp_2
+    - pins_cp_3
+    - pins_mp_3
