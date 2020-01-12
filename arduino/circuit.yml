@@ -615,7 +615,7 @@
 - id: 77
   type: ferrite
   label: L1
-  pn: blm21
+  pn: "blm21"
 - id: 78
   type: capacitor
   label: C8
