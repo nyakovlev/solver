@@ -1,9 +1,10 @@
-- id: 0
+- id: ff_qfn32
   type: form_factor
   name: "QFN32"
-- id: 1
+  shape: [{"file": "atmega8u2/qfn32/cad.yml"}, {"id": "asm_0"}]
+- id: ff_tqfp32
   type: form_factor
   name: "TQFP32"
-- id: 2
+- id: ff_vqfp32
   type: form_factor
   name: "VQFP32"
