@@ -1,0 +1,305 @@
+# dimensions here are deg & mm unless specified otherwise.
+
+# casing
+- id: line_0
+  type: line
+- id: line_1
+  type: line
+- id: line_2
+  type: line
+- id: line_3
+  type: line
+
+- id: c_0
+  type: coincident
+  a: [line_0, b]
+  b: [line_1, a]
+- id: c_1
+  type: coincident
+  a: [line_1, b]
+  b: [line_2, a]
+- id: c_2
+  type: coincident
+  a: [line_2, b]
+  b: [line_3, a]
+- id: c_3
+  type: coincident
+  a: [line_3, b]
+  b: [line_0, a]
+
+- id: d_0
+  type: dim
+  dtype: angle
+  tgt: [line_0]
+  v: 180
+- id: d_1
+  type: dim
+  dtype: angle
+  tgt: [line_1]
+  v: 270
+- id: d_2
+  type: dim
+  dtype: angle
+  tgt: [line_2]
+  v: 0
+- id: d_3
+  type: dim
+  dtype: angle
+  tgt: [line_3]
+  v: 90
+
+- id: d_4
+  type: dim
+  dtype: distance
+  cmps:
+    - [line_0]
+  v: 5
+- id: d_5
+  type: dim
+  dtype: distance
+  cmps:
+    - [line_1]
+  v: 5
+
+- id: sk_0
+  type: sketch
+  features:
+    - line_0
+    - line_1
+    - line_2
+    - line_3
+    - c_0
+    - c_1
+    - c_2
+    - c_3
+    - d_0
+    - d_1
+    - d_2
+    - d_3
+    - d_4
+    - d_5
+
+- id: ext_0
+  type: extrude
+  sketch: sk_0
+
+- id: d_6
+  type: dim
+  dtype: distance
+  cmps:
+    - [ext_0]
+  v:
+    min: 0.8
+    max: 1
+
+# pin
+- id: line_4
+  type: line
+- id: line_5
+  type: line
+- id: line_6
+  type: line
+- id: arc_0
+  type: arc
+- id: cline_0
+  type: line
+  construction: true
+
+- id: d_7
+  type: dim
+  dtype: angle
+  tgt: [line_4]
+  v: 0
+- id: d_8
+  type: dim
+  dtype: angle
+  tgt: [line_5]
+  v: 90
+- id: d_9
+  type: dim
+  dtype: angle
+  tgt: [line_6]
+  v: 90
+- id: d_10
+  type: dim
+  dtype: angle
+  tgt: [cline_0]
+  v: 90
+
+- id: c_4
+  type: coincident
+  a: [line_4, a]
+  b: [line_5, a]
+- id: c_5
+  type: coincident
+  a: [line_4, b]
+  b: [line_6, a]
+- id: mp_0
+  type: midpoint
+  line: [line_4]
+  point: [cline_0, a]
+- id: c_6
+  type: coincident
+  a: [line_5, b]
+  b: [arc_0, e]
+- id: c_7
+  type: coincident
+  a: [line_6, b]
+  b: [arc_0, s]
+- id: c_8
+  type: coincident
+  a: [cline_0, b]
+  b: [arc_0]
+
+- id: d_11
+  type: dim
+  dtype: distance
+  cmps:
+    - [cline_0]
+  v:
+    min: 0.30
+    nom: 0.40
+    max: 0.50
+- id: d_12
+  type: dim
+  dtype: distance
+  cmps:
+    - [line_4]
+  v:
+    min: 0.18
+    nom: 0.25
+    max: 0.30
+- id: tan_0
+  type: tangent
+  curve: [arc_0]
+  cmp: [line_5]
+- id: tan_1
+  type: tangent
+  curve: [arc_0]
+  cmp: [line_6]
+
+- id: sk_1
+  type: sketch
+  features:
+    - line_4
+    - line_5
+    - line_6
+    - arc_0
+    - cline_0
+    - d_7
+    - d_8
+    - d_9
+    - d_10
+    - c_4
+    - c_5
+    - mp_0
+    - c_6
+    - c_7
+    - c_8
+    - d_11
+    - d_12
+    - tan_0
+    - tan_1
+
+- id: ext_1
+  type: extrude
+  sketch: sk_1
+
+- id: d_13
+  type: dim
+  dtype: distance
+  cmps:
+    - [ext_1]
+  v:
+    min: 0.05
+    nom: 0.20
+    max: 1.05
+
+- id: ref_0
+  type: reference
+
+- id: mp_1
+  type: midpoint
+  line: [line_4]
+  point: [ref_0]
+
+# pinnnnsuh
+- id: arr_0
+  type: array
+  feature: [ext_1]
+  reference: ref_0
+  axis_line: line_4
+- id: cst_0
+  type: cst
+  param: [arr_0, ct]
+  v: 8
+- id: d_14
+  type: dim
+  dtype: distance
+  cmps:
+    - [arr_0, sep]
+  v: 0.5
+- id: ref_1
+  type: reference
+- id: mp_2
+  type: midpoint
+  line: [arr_0, line]
+  point: [ref_1]
+- id: gp_0
+  type: group
+  members:
+    - arr_0
+    - cst_0
+    - d_14
+    - ref_1
+    - mp_2
+    - gp_0
+
+# pin placement on casing
+- id: pins_cp_0
+  type: copy
+  feature: gp_0
+- id: pins_mp_0
+  type: midpoint
+  line: [ext_0, sk_0, line_0]
+  b: [pins_cp_0, ref_1]
+  offset:
+    z:
+      min: -0.05
+      max: 0
+
+- id: pins_cp_1
+  type: copy
+  feature: gp_0
+- id: pins_mp_1
+  type: midpoint
+  line: [ext_0, sk_0, line_1]
+  b: [pins_cp_1, ref_1]
+  offset:
+    z:
+      min: -0.05
+      max: 0
+
+- id: pins_cp_2
+  type: copy
+  feature: gp_0
+- id: pins_mp_2
+  type: midpoint
+  line: [ext_0, sk_0, line_2]
+  b: [pins_cp_2, ref_1]
+  offset:
+    z:
+      min: -0.05
+      max: 0
+
+- id: pins_cp_3
+  type: copy
+  feature: gp_0
+- id: pins_mp_3
+  type: midpoint
+  line: [ext_0, sk_0, line_3]
+  b: [pins_cp_3, ref_1]
+  offset:
+    z:
+      min: -0.05
+      max: 0
