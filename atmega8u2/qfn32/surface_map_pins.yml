@@ -1,168 +1,163 @@
 - id: 1
   type: cmp_pin
   pin_id: 1
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 0, ext_1, faces, base]
 - id: 2
   type: cmp_pin
   pin_id: 2
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 1, ext_1, faces, base]
 - id: 3
   type: cmp_pin
   pin_id: 3
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 2, ext_1, faces, base]
 - id: 4
   type: cmp_pin
   pin_id: 4
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 3, ext_1, faces, base]
 - id: 5
   type: cmp_pin
   pin_id: 5
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 4, ext_1, faces, base]
 - id: 6
   type: cmp_pin
   pin_id: 6
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 5, ext_1, faces, base]
 - id: 7
   type: cmp_pin
   pin_id: 7
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 6, ext_1, faces, base]
 - id: 8
   type: cmp_pin
   pin_id: 8
+  contact_type: surface
   contact: [pins_cp_1, arr_0, 7, ext_1, faces, base]
 
 - id: 9
   type: cmp_pin
   pin_id: 9
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 0, ext_1, faces, base]
 - id: 10
   type: cmp_pin
   pin_id: 10
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 1, ext_1, faces, base]
 - id: 11
   type: cmp_pin
   pin_id: 11
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 2, ext_1, faces, base]
 - id: 12
   type: cmp_pin
   pin_id: 12
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 3, ext_1, faces, base]
 - id: 13
   type: cmp_pin
   pin_id: 13
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 4, ext_1, faces, base]
 - id: 14
   type: cmp_pin
   pin_id: 14
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 5, ext_1, faces, base]
 - id: 15
   type: cmp_pin
   pin_id: 15
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 6, ext_1, faces, base]
 - id: 16
   type: cmp_pin
   pin_id: 16
+  contact_type: surface
   contact: [pins_cp_2, arr_0, 7, ext_1, faces, base]
 
 - id: 17
   type: cmp_pin
   pin_id: 17
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 0, ext_1, faces, base]
 - id: 18
   type: cmp_pin
   pin_id: 18
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 1, ext_1, faces, base]
 - id: 19
   type: cmp_pin
   pin_id: 19
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 2, ext_1, faces, base]
 - id: 20
   type: cmp_pin
   pin_id: 20
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 3, ext_1, faces, base]
 - id: 21
   type: cmp_pin
   pin_id: 21
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 4, ext_1, faces, base]
 - id: 22
   type: cmp_pin
   pin_id: 22
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 5, ext_1, faces, base]
 - id: 23
   type: cmp_pin
   pin_id: 23
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 6, ext_1, faces, base]
 - id: 24
   type: cmp_pin
   pin_id: 24
+  contact_type: surface
   contact: [pins_cp_3, arr_0, 7, ext_1, faces, base]
 
 - id: 25
   type: cmp_pin
   pin_id: 25
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 0, ext_1, faces, base]
 - id: 26
   type: cmp_pin
   pin_id: 26
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 1, ext_1, faces, base]
 - id: 27
   type: cmp_pin
   pin_id: 27
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 2, ext_1, faces, base]
 - id: 28
   type: cmp_pin
   pin_id: 28
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 3, ext_1, faces, base]
 - id: 29
   type: cmp_pin
   pin_id: 29
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 4, ext_1, faces, base]
 - id: 30
   type: cmp_pin
   pin_id: 30
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 5, ext_1, faces, base]
 - id: 31
   type: cmp_pin
   pin_id: 31
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 6, ext_1, faces, base]
 - id: 32
   type: cmp_pin
   pin_id: 32
+  contact_type: surface
   contact: [pins_cp_0, arr_0, 7, ext_1, faces, base]
-
-- id: cmp_0
-  type: cmp
-  part: asm_0
-  pins:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    - 10
-    - 11
-    - 12
-    - 13
-    - 14
-    - 15
-    - 16
-    - 17
-    - 18
-    - 19
-    - 20
-    - 21
-    - 22
-    - 23
-    - 24
-    - 25
-    - 26
-    - 27
-    - 28
-    - 29
-    - 30
-    - 31
-    - 32

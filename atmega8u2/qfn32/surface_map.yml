@@ -1,0 +1,4 @@
+id: cmp_0
+type: cmp
+part: [{"file": "atmega8u2/qfn32/cad.yml"}, {"id": "asm_0"}]
+pins: [{"file": "atmega8u2/qfn32/surface_map_pins.yml"}]

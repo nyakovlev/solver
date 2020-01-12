@@ -1,0 +1,7 @@
+- id: pcb_qfn32
+  type: pcb_cmp
+  pinout: [{"file": "atmega8u2/pinout.yml"}]
+  surface_map: [{"file": "atmega8u2/qfn32/surface_map.yml"}]
+  circuit_bvr: null  # Defines how it behaves in an electrical circuit;
+  # simple components have basic rules, chips reference machine code etc.
+# other form factors will get listed here

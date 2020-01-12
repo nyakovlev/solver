@@ -1,0 +1,6 @@
+- id: 0
+  type: board
+  cmps:
+    - [{"file": "atmega8u2/pcb_cmp.yml"}, {"id": "pcb_qfn32"}]
+    # TODO: List all pieces that will be soldered onto board
+  circuit: [{"file": "arduino/circuit.yml"}]
