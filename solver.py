@@ -7,81 +7,101 @@ class AggSolver:
         self.op = (lambda x, y: x + y) if op is None else op
         self.div = (lambda x, ct: x / ct) if div is None else div
 
-    def solution(self, eqs, p):
-        for e in eqs:
-            for si, s in enumerate(e):
-                vs = [i for i in s if type(i) is str]
-                if len(vs) == 1 and vs[0] == p:
-                    return e[int(not si)]
+    def solve(self, eqs, params):
+        res = []
+        nparams = {}
+        steps = 0
+        while True:
+            neqs = self.get_cmbs(eqs)
+            self.filter_existing(eqs, neqs)
+            if len(neqs) == 0:
+                break
+            neq, score = self.get_next_best(neqs)
+            eqs.append(neq)
+            if score == 1:
+                res.append(neq)
+                k, v = self.resolve(neq)
+                nparams[k] = v
+                eqs.append([[k], [v]])
+            if len(res) >= len(params):
+                break
+            steps += 1
+        return nparams
 
-    def solved(self, eqs, params):
-        return not any([self.solution(eqs, p) is None for p in params])
+    def substitute(self, eqs, k, v):
+        for eq in eqs:
+            for s in [0, 1]:
+                if k in eq[s]:
+                    for i in range(0, len(eq[s])):
+                        if eq[s][i] == k:
+                            eq[s][i] = v
 
-    def add_eq(self, eqs, rt_map=None):
-        if rt_map is None:
-            rt_map = {}
-        best = {
-            "i": None,
-            "oi": None,
-            "unsolved": -1,
-            "total": -1,
-            "flip": False
-        }
+    def resolve(self, eq):
+        vnms = [i for i in eq[0] + eq[1] if type(i) is str]
+        div = len(vnms)
+        vnm = vnms[0]
+        if vnm in eq[1]:
+            eq = [eq[1], eq[0]]
+        v = [i for i in eq[1]]
+        for i in eq[0]:
+            if type(i) is not str:
+                v.append(self.swap(i))
+        ans = v[0]
+        for i in range(1, len(v)):
+            ans = self.op(ans, v[i])
+        if div > 1:
+            ans = self.div(ans, div)
+        return vnm, ans
+
+    def get_next_best(self, eqs):
+        score = None
+        res = None
+        for eq in eqs:
+            cscore = len(list(set([i for i in eq[0] if type(i) is str] + [i for i in eq[1] if type(i) is str])))
+            if cscore > 0:
+                if res is None or cscore < score:
+                    score = cscore
+                    res = eq
+        return res, score
+
+    def filter_existing(self, base, ns):
+        for i in reversed(range(0, len(ns))):
+            for b in base:
+                try:
+                    if self.match(b, ns[i]):
+                        del ns[i]
+                except:
+                    pass
+
+    def match(self, a, b):
+        ea = [[i for i in a[0] if type(i) is str], [i for i in a[1] if type(i) is str]]
+        ea[0].sort()
+        ea[1].sort()
+        ea.sort()
+        eb = [[i for i in b[0] if type(i) is str], [i for i in b[1] if type(i) is str]]
+        eb[0].sort()
+        eb[1].sort()
+        eb.sort()
+        return ea == eb
+
+    def get_cmbs(self, eqs):
+        res = []
         for i in range(0, len(eqs)):
-            e = eqs[i]
-            rts = rt_map[i] if i in rt_map else []
-            ois = [oi for oi in range(0, len(eqs)) if oi != i and oi not in rts]
-            for oi in ois:
-                oe = eqs[oi]
-                u, t, f = self.get_reduction(e, oe)
-                self.update_best(best, i, oi, u, t, f)
-        if best["i"] is not None:
-            pprint(best)
-            ne = self.combine_eqs(eqs[best["i"]], eqs[best["oi"]])
-            rt_map[len(eqs)] = [best["i"], best["oi"]]
-            eqs.append(ne)
-            return ne
+            eq = eqs[i]
+            seqs = eqs[:i] + eqs[i + 1:]
+            for seq in seqs:
+                res.append(self.cmb(eq, seq))
+                res.append(self.cmb(eq, [seq[1], seq[0]]))
+        return res
 
-    def update_best(self, best, i, oi, u, t, f):
-        if u == 0:
-            return
-        if u < t:
-            if (u < best["unsolved"]) or (u == best["unsolved"] and t < best["total"]):
-                best["i"] = i
-                best["oi"] = oi
-                best["unsolved"] = u
-                best["total"] = t
-                best["flip"] = f
-
-    def get_reduction(self, a, b):
-        for e in [a, b]:
-            for ei in [0, 1]:
-                e[ei] = [i for i in e[ei] if type(i) is str]
-        t = len(list(set(a[0] + a[1] + b[0] + b[1])))
-        u1 = self.get_u(a[0] + b[0], a[1] + b[1])
-        u2 = self.get_u(a[0] + b[1], a[1] + b[0])
-        if 0 < u2 < u1:
-            return u2, t, True
-        else:
-            return u1, t, False
-
-    def get_u(self, a, b):
-        a = [i for i in a]
-        b = [i for i in b]
+    def cmb(self, eq1, eq2):
+        a = eq1[0] + eq2[0]
+        b = eq1[1] + eq2[1]
         rm = []
         for i in a:
             if i in b:
-                rm.append(i)
                 b.remove(i)
+                rm.append(i)
         for i in rm:
             a.remove(i)
-        return len(list(set(a + b)))
-
-    def combine_eqs(self, a, b):
-        pass
-
-    def solve(self, eqs, params):
-        while not self.solved(eqs, params):
-            if not self.add_eq(eqs):
-                break
-        return {p: self.solution(eqs, p) for p in params}
+        return [a, b]

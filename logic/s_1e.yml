@@ -1,0 +1,12 @@
+- id: g_0
+  type: node
+
+- id: cv_0
+  type: conv
+  rule:
+
+- id: g_1
+  type: node
+
+- id: g_2
+  type: node

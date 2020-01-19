@@ -1,0 +1,131 @@
+- id: 10
+  type: pin
+  label: VCC
+  vsrc: 5
+
+- id: 0
+  type: resistor
+  label: R1
+- id: 1
+  type: resistor
+  label: R2
+- id: 2
+  type: resistor
+  label: R3
+
+- id: 11
+  type: pin
+  label: S1
+
+- id: 3
+  type: resistor
+  label: R4
+  ohms: 20
+- id: 4
+  type: resistor
+  label: R5
+  ohms: 70
+- id: 5
+  type: resistor
+  label: R6
+  ohms: 80
+
+- id: 12
+  type: pin
+  label: S2
+
+- id: 6
+  type: resistor
+  label: R7
+  ohms: 120
+- id: 7
+  type: resistor
+  label: R8
+  ohms: 130
+- id: 8
+  type: resistor
+  label: R9
+  ohms: 90
+
+- id: 9
+  type: pin
+  label: GND
+  vsrc: 0
+
+- id: w_0
+  type: connection
+  src: [10]
+  dst: [0, a]
+- id: w_1
+  type: connection
+  src: [10]
+  dst: [1, a]
+- id: w_2
+  type: connection
+  src: [10]
+  dst: [2, a]
+
+- id: w_3
+  type: connection
+  src: [0, b]
+  dst: [11]
+- id: w_4
+  type: connection
+  src: [1, b]
+  dst: [11]
+- id: w_5
+  type: connection
+  src: [2, b]
+  dst: [11]
+
+- id: w_6
+  type: connection
+  src: [11]
+  dst: [3, a]
+- id: w_7
+  type: connection
+  src: [11]
+  dst: [4, a]
+- id: w_8
+  type: connection
+  src: [11]
+  dst: [5, a]
+
+- id: w_9
+  type: connection
+  src: [3, b]
+  dst: [12]
+- id: w_10
+  type: connection
+  src: [4, b]
+  dst: [12]
+- id: w_11
+  type: connection
+  src: [5, b]
+  dst: [12]
+
+- id: w_12
+  type: connection
+  src: [12]
+  dst: [6, a]
+- id: w_13
+  type: connection
+  src: [12]
+  dst: [7, a]
+- id: w_14
+  type: connection
+  src: [12]
+  dst: [8, a]
+
+- id: w_15
+  type: connection
+  src: [6, b]
+  dst: [9]
+- id: w_16
+  type: connection
+  src: [7, b]
+  dst: [9]
+- id: w_17
+  type: connection
+  src: [8, b]
+  dst: [9]
