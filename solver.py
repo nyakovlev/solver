@@ -1,4 +1,5 @@
 from pprint import pprint
+import math
 
 
 class AggSolver:
@@ -23,7 +24,8 @@ class AggSolver:
                 res.append(neq)
                 k, v = self.resolve(neq)
                 nparams[k] = v
-                eqs.append([[k], [v]])
+                self.substitute(eqs, k, v)
+                # eqs.append([[k], [v]])
             if len(res) >= len(params):
                 break
             steps += 1
@@ -76,14 +78,34 @@ class AggSolver:
 
     def match(self, a, b):
         ea = [[i for i in a[0] if type(i) is str], [i for i in a[1] if type(i) is str]]
+        ea = self.reduce(ea)
         ea[0].sort()
         ea[1].sort()
         ea.sort()
         eb = [[i for i in b[0] if type(i) is str], [i for i in b[1] if type(i) is str]]
+        eb = self.reduce(eb)
         eb[0].sort()
         eb[1].sort()
         eb.sort()
         return ea == eb
+
+    def reduce(self, eq):
+        c = [{}, {}]
+        for i in [0, 1]:
+            for v in eq[i]:
+                if v not in c[i]:
+                    c[i][v] = 0
+                c[i][v] += 1
+        cs = list(c[0].items()) + list(c[1].items())
+        gcd = None
+        for i in range(1, len(cs)):
+            gcd = math.gcd(cs[i][1], (cs[i - 1][1] if gcd is None else gcd))
+        if gcd == 1:
+            return eq
+        for i in [0, 1]:
+            c[i] = {k: v / gcd for k, v in c[i].items()}
+            c[i] = [k for k, v in c[i].items() for j in range(0, int(v))]
+        return c
 
     def get_cmbs(self, eqs):
         res = []
