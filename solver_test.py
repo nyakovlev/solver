@@ -14,10 +14,10 @@ class AggSolveTests(unittest.TestCase):
                 ["w", "x", "y"],
                 [18]
             ],
-            [
-                ["x", "y", "z"],
-                [21]
-            ],
+            # [
+            #     ["x", "y", "z"],
+            #     [21]
+            # ],
             [
                 ["y", "z", "w"],
                 [20]

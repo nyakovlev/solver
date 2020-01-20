@@ -18,6 +18,7 @@ class AggSolver:
                 break
             neq, score = self.get_next_best(neqs)
             eqs.append(neq)
+            print(score, neq)
             if score == 1:
                 res.append(neq)
                 k, v = self.resolve(neq)
@@ -88,7 +89,7 @@ class AggSolver:
         res = []
         for i in range(0, len(eqs)):
             eq = eqs[i]
-            seqs = eqs[:i] + eqs[i + 1:]
+            seqs = eqs[i + 1:]
             for seq in seqs:
                 res.append(self.cmb(eq, seq))
                 res.append(self.cmb(eq, [seq[1], seq[0]]))
