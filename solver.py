@@ -29,6 +29,7 @@ class AggSolver:
             if len(res) >= len(params):
                 break
             steps += 1
+        print(nparams)
         return nparams
 
     def substitute(self, eqs, k, v):
@@ -66,6 +67,19 @@ class AggSolver:
                     score = cscore
                     res = eq
         return res, score
+
+    # def get_score(self, eq):
+    #     eq = [[i for i in eq[0] if type(i) is str], [i for i in eq[1] if type(i) is str]]
+    #     eq = self.reduce(eq)
+    #     rm = []
+    #     a = [i for i in eq[0]]
+    #     b = [i for i in eq[1]]
+    #     for i in a:
+    #         if i in b:
+    #             b.remove(i)
+    #             rm.append(i)
+    #     for i in rm:
+    #         a.remove(i)
 
     def filter_existing(self, base, ns):
         for i in reversed(range(0, len(ns))):
